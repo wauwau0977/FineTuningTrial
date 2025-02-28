@@ -1,0 +1,14 @@
+base_model: "meta-llama/Llama-2-7b-chat-hf"  # Use an already trained LLaMA model
+datasets:
+  - path: "/path/to/axolotl/datasets/continued_pretraining.jsonl"
+    type: "text"
+
+training:
+  num_epochs: 3
+  per_device_train_batch_size: 4
+  learning_rate: 2e-4
+  warmup_steps: 100
+  logging_steps: 10
+  save_steps: 200
+  eval_steps: 500
+  max_length: 4096  # Ensure it matches your model's token limit
