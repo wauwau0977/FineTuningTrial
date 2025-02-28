@@ -11,7 +11,7 @@ PROJECT_NAME = "Warmduscher"
 MAX_CHARS_PER_SAMPLE = 2048  
 
 # Supported file extensions
-VALID_EXTENSIONS = ('.java', '.ts', '.js', '.tsx', '.jsx', '.md', '.txt', '.html')
+VALID_EXTENSIONS = ('.java', '.ts', '.tsx', '.jsx', '.md', '.txt', '.html')
 
 # Regex patterns for Java and TypeScript function/class/interface detection
 FUNC_PATTERN = re.compile(r'^(\s*(public|private|protected|static|async)?\s*\w+\s+\w+\s*\(.*?\)\s*{?)', re.MULTILINE)
