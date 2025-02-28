@@ -1,6 +1,8 @@
 This method is called continued pre-training or domain adaptation.
 
 
+accelerate launch -m axolotl.cli.train axolotl_config.yaml
+
 
 
 axolotl train config.yml

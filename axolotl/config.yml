@@ -1,14 +1,51 @@
-base_model: "meta-llama/Llama-2-7b-chat-hf"  # Use an already trained LLaMA model
-datasets:
-  - path: "/path/to/axolotl/datasets/continued_pretraining.jsonl"
-    type: "text"
+# axolotl_config.yaml
+base_model: meta-llama/Llama-3-8B
+model_type: AutoModelForCausalLM
+tokenizer_type: AutoTokenizer
 
-training:
-  num_epochs: 3
-  per_device_train_batch_size: 4
-  learning_rate: 2e-4
-  warmup_steps: 100
-  logging_steps: 10
-  save_steps: 200
-  eval_steps: 500
-  max_length: 4096  # Ensure it matches your model's token limit
+# Load model in 4-bit precision to optimize memory usage
+load_in_4bit: true
+bnb_4bit_quant_type: nf4
+bnb_4bit_use_double_quant: true
+
+# Dataset configuration
+datasets:
+  - path: ./learning_json/llm_friendly_dataset.jsonl
+    type: text
+
+# Training parameters
+sequence_len: 2048
+val_set_size: 0.05  # 5% of data used for validation
+output_dir: ./outputs/llama-8b-finetune
+
+# LoRA (Low-Rank Adaptation) parameters for efficient fine-tuning
+adapter: lora
+lora_r: 32
+lora_alpha: 16
+lora_dropout: 0.05
+lora_target_modules:
+  - q_proj
+  - v_proj
+
+# Training hyperparameters
+micro_batch_size: 2
+gradient_accumulation_steps: 4
+num_epochs: 3
+learning_rate: 0.0002
+lr_scheduler: cosine
+warmup_steps: 100
+
+# Mixed precision training for faster and memory-efficient training
+bf16: true
+
+# Gradient checkpointing to save memory
+gradient_checkpointing: true
+
+# Logging and monitoring
+wandb_project: your_wandb_project_name
+wandb_entity: your_wandb_entity_name
+logging_steps: 10
+
+# Additional configurations
+train_on_inputs: false
+group_by_length: false
