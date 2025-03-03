@@ -17,7 +17,7 @@ learning_rate: 0.0003
 
 #max_steps = (num_samples / batch_size) * num_epochs
 max_steps: 20
-eval_strategy : no
+eval_strategy: "no"
 
 
 # Load model in 4-bit precision to optimize memory usage
