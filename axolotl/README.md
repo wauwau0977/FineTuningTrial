@@ -5,11 +5,13 @@ accelerate launch -m axolotl.cli.train axolotl_config.yaml
 
 
 
-axolotl train config.yml
+axolotl train /workspace/FineTuningTrial/axolotl/config2.yml
 
+axolotl inference /workspace/FineTuningTrial/axolotl/config2.yml --lora-model-dir="./outputs/model-out"
 
 # Reference
 tiny-llama/pretrain.yml
+
 
 
 
