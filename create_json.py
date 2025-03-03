@@ -4,8 +4,12 @@ import re
 
 # Define the input source directory and output dataset file
 SOURCE_DIR = "learning_sources"
-OUTPUT_FILE = "learning_json/llm_friendly_dataset.jsonl"
+OUTPUT_DIR = "learning_json"
+OUTPUT_FILE = os.path.join(OUTPUT_DIR, "llm_friendly_dataset.jsonl")
 PROJECT_NAME = "Warmduscher"
+
+# Ensure output directory exists
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # Define max token limit (adjust based on your model)
 MAX_CHARS_PER_SAMPLE = 2048  
@@ -69,6 +73,9 @@ def extract_text_for_llm_friendly_splitting(source_dir, output_file):
     Reads files from source_dir, extracts text, and writes to a JSONL file in an LLM-friendly way.
     """
     dataset = []
+
+    # Ensure the output directory exists before writing
+    os.makedirs(os.path.dirname(output_file), exist_ok=True)
 
     # Overwrite file if it exists
     if os.path.exists(output_file):
