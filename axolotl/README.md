@@ -13,6 +13,13 @@ axolotl inference /workspace/FineTuningTrial/axolotl/config2.yml --lora-model-di
 tiny-llama/pretrain.yml
 
 
+# Prmoting
+<|system|>
+You are a java programmer for the warmduscher app</s>
+<|user|>
+Write a java class for ThserverApplication </s>
+<|assistant|>
+
 
 
 What Happens Under the Hood?
