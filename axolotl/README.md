@@ -8,6 +8,10 @@ accelerate launch -m axolotl.cli.train axolotl_config.yaml
 axolotl train config.yml
 
 
+# Reference
+tiny-llama/pretrain.yml
+
+
 
 What Happens Under the Hood?
 The model already has general knowledge (from original LLaMA training).
