@@ -1,7 +1,19 @@
+
+# start:
+# axolotl train /workspace/FineTuningTrial/axolotl/config.yml
+
 # axolotl_config.yaml
-base_model: meta-llama/Llama-3-8B
-model_type: AutoModelForCausalLM
-tokenizer_type: AutoTokenizer
+# base_model: meta-llama/Llama-3-8B
+# model_type: AutoModelForCausalLM
+# tokenizer_type: AutoTokenizer
+
+base_model: NousResearch/Nous-Hermes-llama-1b-v1
+adapter: lora
+
+micro_batch_size: 2
+num_epochs: 3
+learning_rate: 0.0003
+
 
 # Load model in 4-bit precision to optimize memory usage
 load_in_4bit: true
@@ -10,7 +22,7 @@ bnb_4bit_use_double_quant: true
 
 # Dataset configuration
 datasets:
-  - path: ./learning_json/llm_friendly_dataset.jsonl
+  - path: /workspace/FineTuningTrial/learning_json/llm_friendly_dataset.jsonl
     type: text
 
 # Training parameters
