@@ -7,3 +7,7 @@ run setup.sh
 huggingface-cli login
 
 
+# tmux
+in file: ~/.tmux.conf add
+set -g mouse on
+run: tmux source-file ~/.tmux.conf

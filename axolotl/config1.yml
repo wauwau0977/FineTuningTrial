@@ -22,9 +22,14 @@ bnb_4bit_quant_type: nf4
 bnb_4bit_use_double_quant: true
 
 # Dataset configuration
-datasets:
-  - path: /workspace/FineTuningTrial/learning_json/llm_friendly_dataset.jsonl
-    type: text
+#datasets:
+#  - path: /workspace/FineTuningTrial/learning_json/llm_friendly_dataset.jsonl
+#    type: text
+
+pretraining_dataset:
+  - path: json
+    data_files:
+      - /workspace/FineTuningTrial/learning_json/llm_friendly_dataset.jsonl
 
 # Training parameters
 sequence_len: 2048
