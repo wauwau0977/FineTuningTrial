@@ -19,6 +19,12 @@ learning_rate: 0.0003
 max_steps: 20
 eval_strategy: "no"
 
+special_tokens:
+  bos_token: "<s>"
+  eos_token: "</s>"
+  unk_token: "<unk>"
+  pad_token: "[PAD]"
+
 
 # Load model in 4-bit precision to optimize memory usage
 load_in_4bit: true
