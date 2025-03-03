@@ -1,13 +1,14 @@
 
 # start:
-# axolotl train /workspace/FineTuningTrial/axolotl/config.yml
+# cd /workspace/axolotl
+# axolotl train /workspace/FineTuningTrial/axolotl/config1.yml
 
 # axolotl_config.yaml
 # base_model: meta-llama/Llama-3-8B
 # model_type: AutoModelForCausalLM
 # tokenizer_type: AutoTokenizer
 
-base_model: NousResearch/Nous-Hermes-llama-1b-v1
+base_model: NousResearch/Llama-3.2-1B
 adapter: lora
 
 micro_batch_size: 2
