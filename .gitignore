@@ -3,3 +3,4 @@ finetune_env/
 learning_sources/
 learning_json/
 last_run_prepared/
+outputs/
