@@ -14,12 +14,19 @@ axolotl inference /workspace/FineTuningTrial/axolotl/config2.yml --lora-model-di
 axolotl train /workspace/data/FineTuningTrial/axolotl/config3.yml
 axolotl inference /workspace/data/FineTuningTrial/axolotl/config3.yml --lora-model-dir="/workspace/data/FineTuningTrial/outputs/out/qlora-llama3-70b" --gradio
 
+````
+### Instruction:
+List all the capitals of Europe.  Give a quick explanation of each city and it's population. 
+
+### Response:
+````
+
 
 # Reference
 tiny-llama/pretrain.yml
 
 
-# Prmoting
+# Promting
 <|system|>
 You are a java programmer for the warmduscher app</s>
 <|user|>
