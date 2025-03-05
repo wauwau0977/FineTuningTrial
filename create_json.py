@@ -15,15 +15,14 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 MAX_CHARS_PER_SAMPLE = 2048  
 
 # Supported file extensions
-VALID_EXTENSIONS = ('.java', '.ts', '.tsx', '.jsx', '.md', '.txt', '.html')
+VALID_EXTENSIONS = ('.java', '.ts', '.tsx', '.jsx')
 
-# Regex patterns for Java and TypeScript function/class/interface detection
-FUNC_PATTERN = re.compile(r'^(\s*(public|private|protected|static|async)?\s*\w+\s+\w+\s*\(.*?\)\s*{?)', re.MULTILINE)
-CLASS_PATTERN = re.compile(r'^(\s*(class|interface|enum|@Component)\s+\w+)', re.MULTILINE)
+# Regex patterns for Java and TypeScript class detection
+CLASS_PATTERN = re.compile(r'^\s*(class|interface|enum|@Component)\s+\w+', re.MULTILINE)
 
 def split_code_logically(code, max_chars):
     """
-    Splits code into logical blocks based on functions while respecting token limits.
+    Splits code into logical blocks while respecting token limits.
     """
     chunks = []
     current_chunk = []
@@ -32,22 +31,15 @@ def split_code_logically(code, max_chars):
     lines = code.split("\n")
     for i, line in enumerate(lines):
         line_length = len(line) + 1  # Account for newline
-        
+
         # If adding this line exceeds the limit, save the chunk
         if current_length + line_length > max_chars and current_chunk:
             chunks.append("\n".join(current_chunk))
             current_chunk = []
             current_length = 0
 
-        # Start a new chunk when encountering a function definition
-        if FUNC_PATTERN.match(line):
-            if current_chunk:
-                chunks.append("\n".join(current_chunk))
-                current_chunk = []
-                current_length = 0
-        
-        # Ensure decorators/annotations are included with the next function
-        if i > 0 and lines[i - 1].strip().startswith("@"): 
+        # Start a new chunk when encountering a class declaration
+        if CLASS_PATTERN.match(line):
             if current_chunk:
                 chunks.append("\n".join(current_chunk))
                 current_chunk = []
@@ -62,15 +54,9 @@ def split_code_logically(code, max_chars):
 
     return chunks
 
-def split_text_logically(content, max_chars):
+def extract_code_for_alpaca(source_dir, output_file):
     """
-    Splits markdown, text, or HTML files into max-sized chunks.
-    """
-    return [content[i:i + max_chars] for i in range(0, len(content), max_chars)]
-
-def extract_text_for_llm_friendly_splitting(source_dir, output_file):
-    """
-    Reads files from source_dir, extracts text, and writes to a JSONL file in an LLM-friendly way.
+    Reads files from source_dir, extracts code, and writes to an Alpaca-style JSONL file.
     """
     dataset = []
 
@@ -85,31 +71,28 @@ def extract_text_for_llm_friendly_splitting(source_dir, output_file):
         for file in files:
             if file.lower().endswith(VALID_EXTENSIONS):
                 file_path = os.path.join(root, file)
-                relative_path = os.path.relpath(file_path, source_dir)
-                
+                relative_path = os.path.relpath(file_path, source_dir)  # Extract relative path
+
                 try:
                     with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
                         content = f.read().strip()
                         if not content:
                             continue
 
-                        # Determine appropriate splitting strategy
-                        if file.lower().endswith(('.md', '.txt', '.html')):
-                            chunks = split_text_logically(content, MAX_CHARS_PER_SAMPLE)
-                        else:
-                            chunks = split_code_logically(content, MAX_CHARS_PER_SAMPLE)
+                        # Split code logically
+                        chunks = split_code_logically(content, MAX_CHARS_PER_SAMPLE)
 
-                        # Check for oversized chunks and log them
+                        # Convert each chunk to Alpaca format
                         for chunk in chunks:
                             if len(chunk) > MAX_CHARS_PER_SAMPLE:
                                 print(f"Warning: Chunk from {file_path} exceeds max token limit, truncating.")
                                 chunk = chunk[:MAX_CHARS_PER_SAMPLE]
-                            
-                            metadata = f"### Project: {PROJECT_NAME}\n" \
-                                       f"### File: {file}\n" \
-                                       f"### Path: {relative_path}\n\n"
 
-                            dataset.append({"text": metadata + chunk})
+                            dataset.append({
+                                "instruction": f"Create for project {PROJECT_NAME} a class {relative_path}",
+                                "input": "",
+                                "output": chunk
+                            })
 
                 except Exception as e:
                     print(f"Error reading {file_path}: {e}")
@@ -122,5 +105,5 @@ def extract_text_for_llm_friendly_splitting(source_dir, output_file):
 
     print(f"Dataset saved to {output_file} with {len(dataset)} samples.")
 
-# Run the extraction with LLM-friendly splitting
-extract_text_for_llm_friendly_splitting(SOURCE_DIR, OUTPUT_FILE)
+# Run the extraction for Alpaca-style dataset
+extract_code_for_alpaca(SOURCE_DIR, OUTPUT_FILE)
