@@ -77,11 +77,6 @@ bf16: true
 # Gradient checkpointing to save memory
 gradient_checkpointing: true
 
-# Logging and monitoring
-wandb_project: your_wandb_project_name
-wandb_entity: your_wandb_entity_name
-logging_steps: 10
-
 # Additional configurations
 train_on_inputs: false
 group_by_length: false
