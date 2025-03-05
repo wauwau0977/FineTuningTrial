@@ -12,7 +12,7 @@ PROJECT_NAME = "Warmduscher"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # Define max token limit (adjust based on your model)
-MAX_CHARS_PER_SAMPLE = 12000  
+MAX_CHARS_PER_SAMPLE = 4000  
 
 # Supported file extensions
 VALID_EXTENSIONS = ('.java', '.ts', '.tsx', '.jsx')

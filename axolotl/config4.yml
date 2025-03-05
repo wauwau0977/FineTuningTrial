@@ -20,11 +20,16 @@ output_dir: ./outputs/qlora-starcoder2-3B
 adapter: qlora
 lora_model_dir:
 
+#### TOO SMALL!!! Shoudl probably not do that on bigger data
+sample_packing_size: 4  # Adjust this based on token limits
+eval_sample_packing: False
+
+
 sequence_len: 8192
 sample_packing: true
 pad_to_sequence_len: true
 
-lora_r: 32
+lora_r: 16
 lora_alpha: 16
 lora_dropout: 0.05
 lora_target_modules:
@@ -72,3 +77,4 @@ fsdp: []  # Set to an empty list instead of 'false'
 gradient_checkpointing: true  # Enable memory-efficient training
 
 special_tokens:
+  pad_token: "<|end_of_text|>"
