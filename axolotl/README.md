@@ -12,6 +12,7 @@ axolotl train /workspace/data/FineTuningTrial/axolotl/config3.yml
 
 axolotl inference /workspace/FineTuningTrial/axolotl/config2.yml --lora-model-dir="./outputs/model-out-my-01-tiny-llama-1B-v2" --gradio
 
+
 # Reference
 tiny-llama/pretrain.yml
 
