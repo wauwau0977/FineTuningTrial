@@ -16,8 +16,11 @@ num_epochs: 30
 learning_rate: 0.0003
 
 #max_steps = (num_samples / batch_size) * num_epochs
-max_steps: 20
+max_steps: -1
 eval_strategy: "no"
+
+save_embedding_layers: true
+
 
 special_tokens:
   bos_token: "<s>"
