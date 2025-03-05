@@ -12,7 +12,7 @@ PROJECT_NAME = "Warmduscher"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # Define max token limit (adjust based on your model)
-MAX_CHARS_PER_SAMPLE = 2048  
+MAX_CHARS_PER_SAMPLE = 12000  
 
 # Supported file extensions
 VALID_EXTENSIONS = ('.java', '.ts', '.tsx', '.jsx')
@@ -89,7 +89,7 @@ def extract_code_for_alpaca(source_dir, output_file):
                                 chunk = chunk[:MAX_CHARS_PER_SAMPLE]
 
                             dataset.append({
-                                "instruction": f"Create for project {PROJECT_NAME} a class {relative_path}",
+                                "instruction": f"You work for a project called {PROJECT_NAME}. Your task is to write source code for {relative_path}. Directly output the source content.",
                                 "input": "",
                                 "output": chunk
                             })

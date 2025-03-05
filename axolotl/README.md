@@ -21,6 +21,15 @@ List all the capitals of Europe.  Give a quick explanation of each city and it's
 ### Response:
 ````
 
+````
+### Instruction:
+Make a nice java class to pull the weather data from Weather underground using spring boot. Use lombook for the beans in java. 
+
+### Response:
+````
+
+# Starcoder2 3B
+axolotl train /workspace/data/FineTuningTrial/axolotl/config4.yml
 
 # Reference
 tiny-llama/pretrain.yml
