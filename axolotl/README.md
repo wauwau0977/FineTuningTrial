@@ -16,6 +16,14 @@ Hello, who are you?<|im_end|>
 <|im_start|>assistant
 ````
 
+````
+<|im_start|>system
+You are an IT expert of Warmduscher, that's an IT app with the main packages being com.x8ing.thsensor.thserver.<|im_end|>
+<|im_start|>user
+How does the main class work?<|im_end|>
+<|im_start|>assistant
+````
+
 # axolotl train /workspace/FineTuningTrial/axolotl/config2.yml
 
 
