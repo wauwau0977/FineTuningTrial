@@ -11,8 +11,8 @@ OUTPUT_FILE = os.path.join(OUTPUT_DIR, "pretrain_dataset.jsonl")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # Token/character limits
-MAX_CHARS_PER_SAMPLE = 4000  # Adjust based on model context size
-VALID_EXTENSIONS = ('.java', '.ts', '.tsx', '.jsx')
+MAX_CHARS_PER_SAMPLE = 8000  # Adjust based on model context size
+VALID_EXTENSIONS = ('.java', '.ts', '.tsx', '.jsx', '.html', '.htm', '.html', '.md', '.txt', '.sass', '.pkg', '.sql')
 
 # Regex patterns for class and function/method detection (better logical splits)
 CLASS_PATTERN = re.compile(r'^\s*(class|interface|enum|@Component)\s+\w+', re.MULTILINE)

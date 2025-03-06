@@ -6,7 +6,10 @@ accelerate launch -m axolotl.cli.train axolotl_config.yaml
 
 ### Continous Pretraining
 axolotl train /workspace/data/FineTuningTrial/axolotl/config1b.yml 
-axolotl inference /workspace/data/FineTuningTrial/axolotl/config1b.yml --lora-model-dir="/workspace/data/FineTuningTrial/outputs/llama-8b-finetune" --gradio
+axolotl inference /workspace/data/FineTuningTrial/axolotl/config1b.yml --lora-model-dir="/workspace/data/FineTuningTrial/outputs/llama-3b-finetune" --gradio
+
+axolotl train /workspace/data/FineTuningTrial/axolotl/config1c.yml 
+axolotl inference /workspace/data/FineTuningTrial/axolotl/config1c.yml --lora-model-dir="/workspace/data/FineTuningTrial/outputs/llama-8b-finetune" --gradio
 
 ````
 <|im_start|>system
