@@ -1,85 +1,87 @@
 ### Continous pre-training: Mistral code
-### NousResearch/Hermes-3-Llama-3.1-8B
-
 
 # start:
 # cd /workspace/axolotl
-# axolotl train /workspace/FineTuningTrial/axolotl/config1.yml
+# axolotl train /workspace/FineTuningTrial/axolotl/config1d.yml
 
-# axolotl_config.yaml
-# base_model: meta-llama/Llama-3-8B
-# model_type: AutoModelForCausalLM
 tokenizer_type: AutoTokenizer
 
 base_model: mistralai/Mamba-Codestral-7B-v0.1
 adapter: lora
 
-micro_batch_size: 2
-num_epochs: 30
-learning_rate: 0.0003
-
-#max_steps = (num_samples / batch_size) * num_epochs
-max_steps: 500
-eval_strategy: "no"
-
-save_embedding_layers: true
-
-# https://huggingface.co/NousResearch/Hermes-3-Llama-3.1-8B/blob/main/special_tokens_map.json
-#special_tokens:
-#  bos_token: "<s>"
-#  eos_token: "</s>"
-#  unk_token: "<unk>"
-#  pad_token: "[PAD]"
-
-
-# Load model in 4-bit precision to optimize memory usage
-load_in_4bit: true
-bnb_4bit_quant_type: nf4
-bnb_4bit_use_double_quant: true
-
-# Dataset configuration
-#datasets:
-#  - path: /workspace/FineTuningTrial/learning_json/llm_friendly_dataset.jsonl
-#    type: text
+load_in_8bit: true
+load_in_4bit: false
+strict: false
 
 pretraining_dataset:
   - path: json
     data_files:
       - /workspace/data/FineTuningTrial/learning_json/pretrain_dataset.jsonl
-
-# Training parameters
-sequence_len: 4096
-val_set_size: 0.05  # 5% of data used for validation
+dataset_prepared_path: last_run_prepared
+val_set_size: 0.1
 output_dir: ./outputs/config1d
 
-# LoRA (Low-Rank Adaptation) parameters for efficient fine-tuning
 adapter: lora
+lora_model_dir:
+
+sequence_len: 8192
+sample_packing: true
+pad_to_sequence_len: true
+
 lora_r: 32
 lora_alpha: 16
 lora_dropout: 0.05
+lora_target_linear: true
+lora_fan_in_fan_out:
 lora_target_modules:
+  - gate_proj
+  - down_proj
+  - up_proj
   - q_proj
   - v_proj
+  - k_proj
+  - o_proj
 
-lora_modules_to_save:
-  - embed_tokens
-  - lm_head
+wandb_project:
+wandb_entity:
+wandb_watch:
+wandb_name:
+wandb_log_model:
 
-
-# Training hyperparameters
-micro_batch_size: 2
 gradient_accumulation_steps: 4
-num_epochs: 3
-learning_rate: 0.0002
+micro_batch_size: 2
+num_epochs: 5
+max_steps: 500
+optimizer: adamw_bnb_8bit
 lr_scheduler: cosine
-warmup_steps: 100
+learning_rate: 0.0002
+eval_strategy: "no"
 
-# Mixed precision training for faster and memory-efficient training
-bf16: true
-
-# Gradient checkpointing to save memory
-gradient_checkpointing: true
-
-# Additional configurations
 train_on_inputs: false
 group_by_length: false
+bf16: auto
+fp16:
+tf32: false
+
+gradient_checkpointing: true
+early_stopping_patience:
+resume_from_checkpoint:
+local_rank:
+logging_steps: 1
+xformers_attention:
+flash_attention: false
+
+loss_watchdog_threshold: 5.0
+loss_watchdog_patience: 3
+
+warmup_steps: 10
+evals_per_epoch: 4
+eval_table_size:
+eval_max_new_tokens: 128
+saves_per_epoch: 1
+debug:
+deepspeed:
+weight_decay: 0.0
+fsdp:
+fsdp_config:
+special_tokens:
