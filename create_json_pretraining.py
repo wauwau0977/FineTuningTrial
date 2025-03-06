@@ -34,7 +34,7 @@ VALID_EXTENSIONS = (
     '.sql', '.sqlite', '.db', '.properties', '.config', '.env',
 
     # Template and Miscellaneous Files
-    '.hbs', '.ejs', '.jinja', '.jinja2', '.mustache', '.log', '.txt'
+    '.hbs', '.ejs', '.jinja', '.jinja2', '.mustache', '.txt'
 )
 
 PROJECT_NAME = "Warmduscher"  # Change this to your actual project name
