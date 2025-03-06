@@ -1,4 +1,4 @@
-### Continous pre-training
+### Continous pre-training: Mistral code
 ### NousResearch/Hermes-3-Llama-3.1-8B
 
 
@@ -11,7 +11,7 @@
 # model_type: AutoModelForCausalLM
 tokenizer_type: AutoTokenizer
 
-base_model: NousResearch/Hermes-3-Llama-3.1-8B
+base_model: mistralai/Mamba-Codestral-7B-v0.1
 adapter: lora
 
 micro_batch_size: 2
@@ -50,7 +50,7 @@ pretraining_dataset:
 # Training parameters
 sequence_len: 4096
 val_set_size: 0.05  # 5% of data used for validation
-output_dir: ./outputs/llama-3b-finetune
+output_dir: ./outputs/Mistral_Mamba-Codestral-7B
 
 # LoRA (Low-Rank Adaptation) parameters for efficient fine-tuning
 adapter: lora
