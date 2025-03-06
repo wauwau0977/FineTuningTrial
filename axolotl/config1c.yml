@@ -50,7 +50,7 @@ pretraining_dataset:
 # Training parameters
 sequence_len: 4096
 val_set_size: 0.05  # 5% of data used for validation
-output_dir: ./outputs/llama-3b-finetune
+output_dir: ./outputs/config_1c
 
 # LoRA (Low-Rank Adaptation) parameters for efficient fine-tuning
 adapter: lora

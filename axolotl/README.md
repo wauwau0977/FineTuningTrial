@@ -9,7 +9,7 @@ axolotl train /workspace/data/FineTuningTrial/axolotl/config1b.yml
 axolotl inference /workspace/data/FineTuningTrial/axolotl/config1b.yml --lora-model-dir="/workspace/data/FineTuningTrial/outputs/llama-3b-finetune" --gradio
 
 axolotl train /workspace/data/FineTuningTrial/axolotl/config1c.yml 
-axolotl inference /workspace/data/FineTuningTrial/axolotl/config1c.yml --lora-model-dir="/workspace/data/FineTuningTrial/outputs/llama-8b-finetune" --gradio
+axolotl inference /workspace/data/FineTuningTrial/axolotl/config1c.yml --lora-model-dir="/workspace/data/FineTuningTrial/outputs/config1c" --gradio
 
 ````
 <|im_start|>system
