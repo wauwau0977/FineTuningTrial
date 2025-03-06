@@ -24,12 +24,12 @@ eval_strategy: "no"
 
 save_embedding_layers: true
 
-
-special_tokens:
-  bos_token: "<s>"
-  eos_token: "</s>"
-  unk_token: "<unk>"
-  pad_token: "[PAD]"
+# https://huggingface.co/NousResearch/Hermes-3-Llama-3.1-8B/blob/main/special_tokens_map.json
+#special_tokens:
+#  bos_token: "<s>"
+#  eos_token: "</s>"
+#  unk_token: "<unk>"
+#  pad_token: "[PAD]"
 
 
 # Load model in 4-bit precision to optimize memory usage
