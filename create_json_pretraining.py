@@ -12,7 +12,30 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # Token/character limits
 MAX_CHARS_PER_SAMPLE = 8000  # Adjust based on model context size
-VALID_EXTENSIONS = ('.java', '.ts', '.tsx', '.jsx', '.html', '.htm', '.md', '.txt', '.sass', '.pkg', '.sql')
+
+VALID_EXTENSIONS = (
+    # Programming Languages
+    '.java', '.ts', '.tsx', '.jsx', '.js', '.py', '.cpp', '.c', '.cc', '.cxx', '.h', '.hpp', '.cs',
+    '.go', '.rb', '.php', '.swift', '.kt', '.rs', '.pl', '.r', '.scala', '.m', '.sh', '.bash', 
+    '.ps1', '.lua', '.m', '.hs', '.erl', '.ex', '.exs', '.dart', '.coffee', '.vhdl', '.vhd', 
+    '.v', '.vh', '.adb', '.ads', '.f', '.f90', '.f95', '.pas', '.cob', '.cbl', '.asm', '.s', 
+    '.jl', '.clj', '.cljs', '.fs', '.fsi', '.fsx', '.ml', '.mli', '.groovy', '.tcl', '.scm', 
+    '.ss', '.pl', '.pro', '.lisp', '.lsp', '.rkt', '.sas', '.sps', '.do', '.ado', '.awk', 
+    '.make', '.mk', '.bat', '.cmd',
+
+    # Markup and Data Languages
+    '.html', '.htm', '.xml', '.yaml', '.yml', '.json', '.md', '.tex', '.toml', '.ini', 
+    '.rdf', '.sgml', '.sgm', '.csv',
+
+    # Stylesheet Languages
+    '.css', '.sass', '.scss', '.less', '.styl',
+
+    # Database and Config Files
+    '.sql', '.sqlite', '.db', '.properties', '.config', '.env',
+
+    # Template and Miscellaneous Files
+    '.hbs', '.ejs', '.jinja', '.jinja2', '.mustache', '.log', '.txt'
+)
 
 PROJECT_NAME = "Warmduscher"  # Change this to your actual project name
 
