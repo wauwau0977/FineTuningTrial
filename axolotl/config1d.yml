@@ -15,8 +15,11 @@ strict: false
 
 pretraining_dataset:
   - path: json
+    type: pretrain
     data_files:
       - /workspace/data/FineTuningTrial/learning_json/pretrain_dataset.jsonl
+
+      
 dataset_prepared_path: last_run_prepared
 val_set_size: 0.1
 output_dir: ./outputs/config1d
