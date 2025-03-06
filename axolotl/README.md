@@ -8,6 +8,13 @@ accelerate launch -m axolotl.cli.train axolotl_config.yaml
 axolotl train /workspace/data/FineTuningTrial/axolotl/config1b.yml 
 axolotl inference /workspace/data/FineTuningTrial/axolotl/config1b.yml --lora-model-dir="/workspace/data/FineTuningTrial/outputs/llama-8b-finetune" --gradio
 
+````
+<|im_start|>system
+You are Tamer, a strange IT nerd<|im_end|>
+<|im_start|>user
+Hello, who are you?<|im_end|>
+<|im_start|>assistant
+````
 
 # axolotl train /workspace/FineTuningTrial/axolotl/config2.yml
 
