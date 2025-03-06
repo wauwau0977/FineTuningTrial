@@ -12,26 +12,28 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # Token/character limits
 MAX_CHARS_PER_SAMPLE = 8000  # Adjust based on model context size
-VALID_EXTENSIONS = ('.java', '.ts', '.tsx', '.jsx', '.html', '.htm', '.html', '.md', '.txt', '.sass', '.pkg', '.sql')
+VALID_EXTENSIONS = ('.java', '.ts', '.tsx', '.jsx', '.html', '.htm', '.md', '.txt', '.sass', '.pkg', '.sql')
 
-# Regex patterns for class and function/method detection (better logical splits)
-CLASS_PATTERN = re.compile(r'^\s*(class|interface|enum|@Component)\s+\w+', re.MULTILINE)
-FUNCTION_PATTERN = re.compile(r'^\s*(public|private|protected|static|\s)*\s+[\w<>\[\]]+\s+\w+\s*\(.*\)\s*{', re.MULTILINE)
+PROJECT_NAME = "Warmduscher"  # Change this to your actual project name
 
 def clean_code(code):
     """Removes unnecessary empty lines and trims whitespace."""
     return "\n".join([line.rstrip() for line in code.split("\n") if line.strip()])
 
-def split_code_into_chunks(code, max_chars):
+def split_code_if_needed(code, max_chars):
     """
-    Splits code logically by function/method or class boundaries while respecting token limits.
+    Only split the code if it exceeds max_chars, otherwise return a single entry.
     """
+    if len(code) <= max_chars:
+        return [code]  # Return as a single chunk if it fits
+
+    # Otherwise, split the code into chunks based on line breaks
     chunks = []
     current_chunk = []
     current_length = 0
     lines = code.split("\n")
 
-    for i, line in enumerate(lines):
+    for line in lines:
         line_length = len(line) + 1  # Account for newline
 
         # If adding this line exceeds the limit, save the chunk
@@ -39,13 +41,6 @@ def split_code_into_chunks(code, max_chars):
             chunks.append("\n".join(current_chunk))
             current_chunk = []
             current_length = 0
-
-        # Start a new chunk when encountering a class or function declaration
-        if CLASS_PATTERN.match(line) or FUNCTION_PATTERN.match(line):
-            if current_chunk:
-                chunks.append("\n".join(current_chunk))
-                current_chunk = []
-                current_length = 0
 
         current_chunk.append(line)
         current_length += line_length
@@ -58,7 +53,8 @@ def split_code_into_chunks(code, max_chars):
 
 def extract_code_for_pretraining(source_dir, output_file):
     """
-    Reads files from source_dir, extracts code, and writes to a JSONL file suitable for pretraining.
+    Reads files from source_dir, extracts code, and writes to a JSONL file for pretraining.
+    Embeds metadata directly into the "text" field.
     """
     dataset = []
 
@@ -73,6 +69,7 @@ def extract_code_for_pretraining(source_dir, output_file):
         for file in files:
             if file.lower().endswith(VALID_EXTENSIONS):
                 file_path = os.path.join(root, file)
+                relative_path = os.path.relpath(file_path, source_dir)  # Get relative path
 
                 try:
                     with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
@@ -80,13 +77,15 @@ def extract_code_for_pretraining(source_dir, output_file):
                         if not content:
                             continue
 
-                        # Clean and split the code into logical chunks
+                        # Clean the code
                         content = clean_code(content)
-                        chunks = split_code_into_chunks(content, MAX_CHARS_PER_SAMPLE)
+                        chunks = split_code_if_needed(content, MAX_CHARS_PER_SAMPLE)
 
-                        # Add each chunk as a standalone pretraining sample
+                        # Add each chunk as a pretraining sample with metadata in text format
                         for chunk in chunks:
-                            dataset.append({"text": chunk})
+                            dataset.append({
+                                "text": f"project: {PROJECT_NAME}\nfilename: {file}\npath: {relative_path}\n\n{chunk}"
+                            })
 
                 except Exception as e:
                     print(f"Error reading {file_path}: {e}")
