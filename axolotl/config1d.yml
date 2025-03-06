@@ -76,8 +76,8 @@ logging_steps: 1
 xformers_attention:
 flash_attention: false
 
-loss_watchdog_threshold: 5.0
-loss_watchdog_patience: 3
+loss_watchdog_threshold: 50
+loss_watchdog_patience: 30
 
 warmup_steps: 10
 eval_table_size:
