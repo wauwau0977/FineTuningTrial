@@ -16,3 +16,15 @@ https://www.promptingguide.ai/models/mistral-7b
 ````
 
 
+````
+Write a Java program to implement a lambda expression to check if a list of strings are all uppercase or all lowercase or mixedcase.
+`````
+
+````
+Write a Java program to implement a lambda expression to find the average of a list of doubles.
+`````
+
+````
+[INST] Write a Java program to implement a lambda expression to find the second largest element in an array.
+[/INST]  
+````
