@@ -4,6 +4,8 @@
 # cd /workspace/axolotl
 # axolotl train /workspace/FineTuningTrial/axolotl/config1d.yml
 
+# [INST] List all the capitals of Europe.  Give a quick explanation of each city and it's population.  [/INST] 
+
 tokenizer_type: AutoTokenizer
 
 base_model: mistralai/Mamba-Codestral-7B-v0.1
