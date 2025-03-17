@@ -4,17 +4,20 @@ import os
 from gemma3_inference import GemmaInference
 
 class CreateJSON_QA:
-    def __init__(self, file_path="pretrain_dataset.jsonl", output_file="output.alpaca.jsonl"):
+    def __init__(self, file_path="learning_json/pretrain_dataset.jsonl", output_file="learning_json/alpaca.jsonl"):
         self.file_path = file_path
         self.output_file = output_file
         self.gemma = GemmaInference()
         
         self.intros = [
             """
+            Your task is to write an IT specification for the given source code class below, which is part of the project '{project_name}'. 
+            The IT specification shall follow the structure below. If an item of the spec is not applicable just leave it empty.
+
             # IT Specification
 
             ## 1. Summary
-            Provide a clear summary of the code’s purpose and functionality.
+            Provide a clear summary of the code purpose and functionality.
 
             ## 2. File Information
             - **File Location:** (Specify the file path)
@@ -70,15 +73,16 @@ class CreateJSON_QA:
             - **Security Improvements:** Highlight potential security risks.
             - **Scalability Considerations:** Recommend changes for future scalability.
 
-            ---
+            
+            Source code below:
 
-            *This document serves as a structured IT specification for the given source code, providing insights into its functionality, dependencies, and areas for improvement.*
             """,
+
             "Summarize the purpose and functionality of the following source code, and list its dependencies in categorized sections.",
             "Extract key components from the source file below and structure them into an organized specification, including dependencies."
         ]
 
-    def run(self):
+    def run(self, project_name='Warmduscher'):
         with open(self.file_path, "r", encoding="utf-8") as file, open(self.output_file, "w", encoding="utf-8") as output:
             for line in file:
                 data = json.loads(line)
@@ -109,4 +113,4 @@ class CreateJSON_QA:
 
 if __name__ == "__main__":
     creator = CreateJSON_QA()
-    creator.run()
+    creator.run('Warmduscher')
