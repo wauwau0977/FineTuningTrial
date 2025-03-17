@@ -10,3 +10,16 @@ accelerate>=0.26.0
 notebook
 jupyterlab
 
+# uloth
+accelerate 
+bitsandbytes 
+xformers 
+peft 
+sentencepiece 
+protobuf 
+datasets 
+huggingface_hub 
+hf_transfer 
+trl 
+triton
+unsloth

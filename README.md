@@ -7,7 +7,14 @@ run setup.sh
 huggingface-cli login
 
 
+# useful commands:
+nvidia-smi
+
+
 # tmux
 in file: ~/.tmux.conf add
 set -g mouse on
 run: tmux source-file ~/.tmux.conf
+
+# Gemma 3
+spec: https://ai.google.dev/gemma/docs/core
