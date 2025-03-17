@@ -1,6 +1,6 @@
 from unsloth import FastModel
 from unsloth.chat_templates import get_chat_template
-
+import time
 
 fourbit_models = [
     # 4bit dynamic quants for superior accuracy and low memory use
@@ -29,28 +29,53 @@ tokenizer = get_chat_template(
     chat_template = "gemma-3",
 )
 
-messages = [{
-    "role": "user",
-    "content": [{
-        "type": "text",
-        "text": "Continue the sequence: 1, 1, 2, 3, 5, 8,",
+questions = [
+    "Continue the sequence: 1, 1, 2, 3, 5, 8,",
+    "What is the capital of France?",
+    "Explain the theory of relativity briefly.",
+    "What is the tallest mountain on Earth?",
+    "Translate 'hello' into German.",
+    "What is quantum computing?",
+    "List three famous novels by Charles Dickens.",
+    "Summarize the plot of Hamlet.",
+    "What is the chemical symbol for gold?",
+    "Who invented the telephone?",
+]
+
+for question in questions:
+    messages = [{
+        "role": "user",
+        "content": [{
+            "type": "text",
+            "text": question,
+        }]
     }]
-}]
 
-text = tokenizer.apply_chat_template(
-    messages,
-    add_generation_prompt=True,
-)
+    text = tokenizer.apply_chat_template(
+        messages,
+        add_generation_prompt=True,
+    )
 
-inputs = tokenizer([text], return_tensors="pt").to("cuda")
+    inputs = tokenizer([text], return_tensors="pt").to("cuda")
 
-outputs = model.generate(
-    **inputs,
-    max_new_tokens=64,
-    temperature=1.0,
-    top_p=0.95,
-    top_k=64,
-)
+    # Time the inference
+    start_time = time.time()
 
-decoded = tokenizer.batch_decode(outputs, skip_special_tokens=True)
-print(decoded[0])
+    outputs = model.generate(
+        **inputs,
+        max_new_tokens=100,
+        temperature=1.0,
+        top_p=0.95,
+        top_k=64,
+    )
+
+    end_time = time.time()
+
+    generation_time = end_time - start_time
+
+    decoded = tokenizer.batch_decode(outputs, skip_special_tokens=True)
+
+    print(f"Q: {question}\n")
+    print(f"A: {decoded[0]}\n")
+    print(f"Generation time: {generation_time:.2f} seconds\n")
+    print("-" * 80, "\n")
