@@ -1,6 +1,7 @@
 from unsloth import FastModel
 from unsloth.chat_templates import get_chat_template
 import time
+import torch
 
 fourbit_models = [
     # 4bit dynamic quants for superior accuracy and low memory use
@@ -17,10 +18,12 @@ fourbit_models = [
     "unsloth/Phi-4",
 ] # More models at https://huggingface.co/unsloth
 
+initial_gpu_allocated = torch.cuda.memory_allocated() / (1024**3)
+initial_gpu_reserved = torch.cuda.memory_reserved() / (1024**3)
 
 model, tokenizer = FastModel.from_pretrained(
     model_name = "unsloth/gemma-3-27b-it",
-    max_seq_length = 2048,  # Adjust as needed
+    max_seq_length = 128000,  # max sequence size for Gemma 3 is 128k probably 131072, but we go for 128
     load_in_4bit = True,  # 4-bit quantization for lower memory usage
 )
 
@@ -43,6 +46,9 @@ questions = [
 ]
 
 for question in questions:
+
+    start_time = time.time()
+
     messages = [{
         "role": "user",
         "content": [{
@@ -58,12 +64,9 @@ for question in questions:
 
     inputs = tokenizer([text], return_tensors="pt").to("cuda")
 
-    # Time the inference
-    start_time = time.time()
-
     outputs = model.generate(
         **inputs,
-        max_new_tokens=100,
+        max_new_tokens=8000,
         temperature=1.0,
         top_p=0.95,
         top_k=64,
@@ -79,3 +82,14 @@ for question in questions:
     print(f"A: {decoded[0]}\n")
     print(f"Generation time: {generation_time:.2f} seconds\n")
     print("-" * 80, "\n")
+
+
+
+# GPU memory usage after queries
+final_gpu_allocated = torch.cuda.memory_allocated() / (1024**3)
+final_gpu_reserved = torch.cuda.memory_reserved() / (1024**3)
+
+print(f"Initial GPU allocated memory: {initial_gpu_allocated:.2f} GB")
+print(f"Initial GPU reserved memory: {initial_gpu_reserved:.2f} GB")
+print(f"Final GPU allocated memory: {final_gpu_allocated:.2f} GB")
+print(f"Final GPU reserved memory: {final_gpu_reserved:.2f} GB")
