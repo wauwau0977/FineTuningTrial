@@ -1,6 +1,10 @@
 import torch
 from transformers import AutoTokenizer, Gemma3ForCausalLM
 
+# run 
+# source finetune_env/bin/activate  
+
+
 ckpt = "google/gemma-3-4b-it"
 model = Gemma3ForCausalLM.from_pretrained(
     ckpt, torch_dtype=torch.bfloat16, device_map="auto"
