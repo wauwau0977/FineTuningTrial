@@ -10,8 +10,8 @@ OUTPUT_FILE = os.path.join(OUTPUT_DIR, "pretrain_dataset.jsonl")
 # Ensure output directory exists
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-# Token/character limits
-MAX_CHARS_PER_SAMPLE = 8000  # Adjust based on model context size
+# Token/character limits (needs some space for the pre-text)
+MAX_CHARS_PER_SAMPLE = 120000  # Adjust based on model context size
 
 VALID_EXTENSIONS = (
     # Programming Languages
