@@ -11,7 +11,7 @@ OUTPUT_FILE = os.path.join(OUTPUT_DIR, "pretrain_dataset.jsonl")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # Token/character limits (needs some space for the pre-text)
-MAX_CHARS_PER_SAMPLE = 120000  # Adjust based on model context size
+MAX_CHARS_PER_SAMPLE = 16000  # Adjust based on model context size
 
 VALID_EXTENSIONS = (
     # Programming Languages
@@ -36,6 +36,8 @@ VALID_EXTENSIONS = (
     # Template and Miscellaneous Files
     '.hbs', '.ejs', '.jinja', '.jinja2', '.mustache', '.txt'
 )
+
+VALID_EXTENSIONS = ('.java', '.ts', '.sass', '.html')
 
 PROJECT_NAME = "Warmduscher"  # Change this to your actual project name
 
