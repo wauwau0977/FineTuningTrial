@@ -1,4 +1,10 @@
 gitpython
 datasets
 jsonlines
-transformers
+torch
+# transformers
+# special transformers lib
+git+https://github.com/huggingface/transformers@v4.49.0-Gemma-3
+notebook
+jupyterlab
+
