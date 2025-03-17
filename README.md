@@ -8,7 +8,7 @@ huggingface-cli login
 
 source finetune_env/bin/activate  
 python3 create_json_pretraining.py 
-python3 create_questions_answers_unsloth.py
+python3 create_json_QA_generation.py
 
 # useful commands:
 nvidia-smi
