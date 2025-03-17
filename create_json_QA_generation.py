@@ -78,11 +78,8 @@ class CreateJSON_QA:
             - **Security Improvements:** Highlight potential security risks.
             - **Scalability Considerations:** Recommend changes for future scalability.
 
-            
             Source code below:
-
             """
-
         ]
 
     def run(self):
@@ -90,37 +87,33 @@ class CreateJSON_QA:
             for line in file:
                 data = json.loads(line)
                 raw_code = data["text"]  # Extract raw source code
-                
                 responses = []
+                
                 for intro in self.intros:
                     question = f"{intro}\n\n{raw_code}"
                     start_time = time.time()
                     answer = self.gemma.inference(question)
                     generation_time = time.time() - start_time
                     
-                    # print(f"Intro: {intro[:100]}...\n")  # Print only first 100 chars for readability
                     print(f"Q: {question[:500]}...\n")  # Print only first 500 chars for readability
                     print(f"A: {answer}...\n")  
                     print(f"Generation time: {generation_time:.2f} seconds\n")
                     print("-" * 80, "\n")
                     
+                    if answer is None:
+                        print("Answer for question was None (Null), skipping...  question= \n {question} ß")
+                        continue
+
                     job = "You are a developer of project '{self.project_name}'. It's your task to implement according to the specification below"
 
                     output_entry = {
                         "instruction": job + answer,  # The LLM's response as the instruction
                         "output": raw_code  # The raw source code as the answer
                     }
+
                     output.write(json.dumps(output_entry) + "\n")
                     output.flush()
                 
-                # Save output in Alpaca format
-                output_entry = {
-                    "instruction": raw_code,
-                    "responses": responses
-                }
-                output.write(json.dumps(output_entry) + "\n")
-                output.flush()
-
 if __name__ == "__main__":
     creator = CreateJSON_QA(project_name="Warmduscher")
     creator.run()
