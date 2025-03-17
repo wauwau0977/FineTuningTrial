@@ -1,7 +1,8 @@
 import time
 import json
 import os
-from gemma3_inference import GemmaInference
+# from gemma3_inference import GemmaInference
+from gemma3_inference_ollama import GemmaInferenceOllama  # Assuming the previous class is in gemma_inference.py
 
 class CreateJSON_QA:
     def __init__(self, 
@@ -12,7 +13,7 @@ class CreateJSON_QA:
         self.file_path = file_path
         self.output_file = output_file
         self.project_name = project_name  # Store project name
-        self.gemma = GemmaInference()
+        self.gemma = GemmaInferenceOllama()
 
         self.intros = [
             f"""
