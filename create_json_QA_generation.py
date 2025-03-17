@@ -106,7 +106,7 @@ class CreateJSON_QA:
                         print("Answer for question was None (Null), skipping...  question= \n {question} ß")
                         continue
 
-                    job = "You are a developer of project '{self.project_name}'. It's your task to implement according to the specification below"
+                    job = f"You are a developer of project '{self.project_name}'. It's your task to implement according to the specification below"
 
                     output_entry = {
                         "instruction": job + answer,  # The LLM's response as the instruction
