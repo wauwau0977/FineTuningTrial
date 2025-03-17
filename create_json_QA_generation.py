@@ -48,10 +48,11 @@ class CreateJSON_QA:
 
             ## 5. Key Components
             Break down the main components of the code, including:
-            - Classes
-            - Functions
-            - Modules
+            - Functions: Give a quick description of what each function is doing
             - Important logic flows
+            - Error handling
+            - Classes: are there any subclasses defined?
+            - Modules
 
             ## 6. Dependencies
 

@@ -10,6 +10,7 @@ class GemmaInference:
         self.load_model()
 
     def load_model(self):
+        torch.cuda.empty_cache()
         self.model, self.tokenizer = FastModel.from_pretrained(
             model_name=self.model_name,
             max_seq_length=self.max_seq_length,
