@@ -63,6 +63,7 @@ for question in questions:
     )
 
     inputs = tokenizer([text], return_tensors="pt").to("cuda")
+    input_len = inputs.input_ids.shape[1]
 
     outputs = model.generate(
         **inputs,
@@ -76,7 +77,8 @@ for question in questions:
 
     generation_time = end_time - start_time
 
-    decoded = tokenizer.batch_decode(outputs, skip_special_tokens=True)
+      # Decode the generated tokens, excluding the input prompt
+    decoded = tokenizer.batch_decode(outputs[:, input_len:], skip_special_tokens=True)
 
     print(f"Q: {question}\n")
     print(f"A: {decoded[0]}\n")
