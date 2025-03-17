@@ -11,11 +11,12 @@ class CreateJSON_QA:
                  ):
         self.file_path = file_path
         self.output_file = output_file
+        self.project_name = project_name  # Store project name
         self.gemma = GemmaInference()
-        
+
         self.intros = [
-            """
-            Your task is to write an IT specification for the given source code class below, which is part of the project '{project_name}'. 
+            f"""
+            Your task is to write an IT specification for the given source code class below, which is part of the project '{self.project_name}'. 
             The IT specification shall follow the structure below. If an item of the spec is not applicable just leave it empty.
 
             # IT Specification
@@ -82,8 +83,6 @@ class CreateJSON_QA:
 
             """,
 
-            "Summarize the purpose and functionality of the following source code, and list its dependencies in categorized sections.",
-            "Extract key components from the source file below and structure them into an organized specification, including dependencies."
         ]
 
     def run(self):
@@ -99,13 +98,20 @@ class CreateJSON_QA:
                     answer = self.gemma.inference(question)
                     generation_time = time.time() - start_time
                     
-                    print(f"Intro: {intro[:100]}...\n")  # Print only first 100 chars for readability
+                    # print(f"Intro: {intro[:100]}...\n")  # Print only first 100 chars for readability
                     print(f"Q: {question[:500]}...\n")  # Print only first 500 chars for readability
-                    print(f"A: {answer[:500]}...\n")  # Print only first 500 chars for readability
+                    print(f"A: {answer}...\n")  
                     print(f"Generation time: {generation_time:.2f} seconds\n")
                     print("-" * 80, "\n")
                     
-                    responses.append({"intro": intro, "answer": answer, "generation_time": generation_time})
+                    job = "You are a developer of project '{self.project_name}'. It's your task to implement according to the specification below"
+
+                    output_entry = {
+                        "instruction": job + answer,  # The LLM's response as the instruction
+                        "output": raw_code  # The raw source code as the answer
+                    }
+                    output.write(json.dumps(output_entry) + "\n")
+                    output.flush()
                 
                 # Save output in Alpaca format
                 output_entry = {
@@ -116,5 +122,5 @@ class CreateJSON_QA:
                 output.flush()
 
 if __name__ == "__main__":
-    creator = CreateJSON_QA()
+    creator = CreateJSON_QA(project_name="Warmduscher")
     creator.run()
