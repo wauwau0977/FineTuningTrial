@@ -19,7 +19,7 @@ fourbit_models = [
 
 
 model, tokenizer = FastModel.from_pretrained(
-    model_name = "unsloth/gemma-3-4b-it",
+    model_name = "unsloth/gemma-3-27b-it",
     max_seq_length = 2048,  # Adjust as needed
     load_in_4bit = True,  # 4-bit quantization for lower memory usage
 )
