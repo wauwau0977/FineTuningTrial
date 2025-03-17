@@ -4,7 +4,11 @@ import os
 from gemma3_inference import GemmaInference
 
 class CreateJSON_QA:
-    def __init__(self, file_path="learning_json/pretrain_dataset.jsonl", output_file="learning_json/alpaca.jsonl"):
+    def __init__(self, 
+                 file_path="learning_json/pretrain_dataset.jsonl", 
+                 output_file="learning_json/alpaca.jsonl", 
+                 project_name='Warmduscher'
+                 ):
         self.file_path = file_path
         self.output_file = output_file
         self.gemma = GemmaInference()
@@ -82,7 +86,7 @@ class CreateJSON_QA:
             "Extract key components from the source file below and structure them into an organized specification, including dependencies."
         ]
 
-    def run(self, project_name='Warmduscher'):
+    def run(self):
         with open(self.file_path, "r", encoding="utf-8") as file, open(self.output_file, "w", encoding="utf-8") as output:
             for line in file:
                 data = json.loads(line)
@@ -113,4 +117,4 @@ class CreateJSON_QA:
 
 if __name__ == "__main__":
     creator = CreateJSON_QA()
-    creator.run('Warmduscher')
+    creator.run()
