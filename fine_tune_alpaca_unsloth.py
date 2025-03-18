@@ -234,7 +234,7 @@ text = tokenizer.apply_chat_template(
 )
 outputs = model.generate(
     **tokenizer([text], return_tensors = "pt").to("cuda"),
-    max_new_tokens = 64, # Increase for longer outputs!
+    max_new_tokens = 500, # Increase for longer outputs!
     # Recommended Gemma-3 settings!
     temperature = 1.0, top_p = 0.95, top_k = 64,
 )
