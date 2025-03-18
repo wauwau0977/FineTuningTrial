@@ -136,6 +136,16 @@ print(f"Peak reserved memory % of max memory = {used_percentage} %.")
 print(f"Peak reserved memory for training % of max memory = {lora_percentage} %.")
 
 
+
+# SAVE MODEL
+model.save_pretrained("my-gemma-3")  # Local saving
+tokenizer.save_pretrained("my-gemma-3")
+
+# save merged
+if True: # Change to True to save finetune!
+    model.save_pretrained_merged("gemma-3-finetune", tokenizer)
+
+
 # inference
 from unsloth.chat_templates import get_chat_template
 tokenizer = get_chat_template(
