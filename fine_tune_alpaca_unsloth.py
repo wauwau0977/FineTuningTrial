@@ -209,10 +209,10 @@ tokenizer.save_pretrained("models/my-gemma-3")
 model.save_pretrained_merged("models/my-gemma-3-finetune-merged", tokenizer)
 
 # save gguf
-model.save_pretrained_gguf(
-        "models/my-gemma-3-finetune-gguf-q8",
-        quantization_type = "Q8_0", # For now only Q8_0, BF16, F16 supported
-)
+# model.save_pretrained_gguf(
+#         "models/my-gemma-3-finetune-gguf-q8",
+#         quantization_type = "Q8_0", # For now only Q8_0, BF16, F16 supported
+# )
 
 
 # inference
