@@ -6,6 +6,7 @@ import os
 
 
 num_proc = 4
+print_example_index = 3
 
 os.environ["OMP_NUM_THREADS"] = str(num_proc)  # Change '4' to the desired number of CPU cores
 os.environ["MKL_NUM_THREADS"] = str(num_proc)  # Also limit MKL-based parallelism
@@ -126,7 +127,7 @@ def apply_chat_template(examples):
     return {"text": texts}
 
 dataset = dataset.map(apply_chat_template, batched=True, num_proc=4 )
-print(dataset[3]["text"])
+print(dataset[min(print_example_index, len(dataset) - 1)]["text"])
 
 
 
@@ -166,11 +167,11 @@ trainer = train_on_responses_only(
 )
 
 #  textLet's verify masking the instruction part is done! Let's print the 100th row again:
-tokenizer.decode(trainer.train_dataset[100]["input_ids"])
+tokenizer.decode(trainer.train_dataset[print_example_index]["input_ids"])
 
 
 # Now let's print the masked out example - you should see only the answer is present:
-tokenizer.decode([tokenizer.pad_token_id if x == -100 else x for x in trainer.train_dataset[100]["labels"]]).replace(tokenizer.pad_token, " ")
+tokenizer.decode([tokenizer.pad_token_id if x == -print_example_index else x for x in trainer.train_dataset[print_example_index]["labels"]]).replace(tokenizer.pad_token, " ")
 
 # memory stats
 gpu_stats = torch.cuda.get_device_properties(0)
