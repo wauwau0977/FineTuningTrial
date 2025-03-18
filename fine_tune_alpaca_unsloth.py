@@ -225,7 +225,7 @@ messages = [{
     "role": "user",
     "content": [{
         "type" : "text",
-        "text" : "What do we say in Glattfelden when we are sad?",
+        "text" : "Was bedeutet das Wörter 'Cheibegruusig' und 'Sausiwegbini Jo' in Glattfelden?",
     }]
 }]
 text = tokenizer.apply_chat_template(
