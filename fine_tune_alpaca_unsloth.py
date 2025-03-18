@@ -35,7 +35,8 @@ model, tokenizer = FastModel.from_pretrained(
     # token = "hf_...", # use one if using gated models
     device_map="auto",         # Automatically place model parts on devices
     max_memory={0: "40GiB", "cpu": "32GiB"},  # Limit memory per device
-    offload_folder="offload"   # Offload model weights to disk if needed
+    offload_folder="offload",   # Offload model weights to disk if needed
+    # not helping! attn_implementation='eager'  # TODO: Actually not so sure if good or not... at least it warns if not set!!! https://github.com/unslothai/unsloth/issues/2025
 )
 
 # We now add LoRA adapters so we only need to update a small amount of parameters!
@@ -121,7 +122,7 @@ def apply_chat_template(examples):
     texts = tokenizer.apply_chat_template(examples["text"])
     return {"text": texts}
 
-dataset = dataset.map(apply_chat_template, batched=True, num_proc=num_proc )
+dataset = dataset.map(apply_chat_template, batched=True, num_proc=4 )
 print(dataset[10]["text"])
 
 
@@ -142,7 +143,7 @@ trainer = SFTTrainer(
         warmup_steps = 5,
         # num_train_epochs = 1, # Set this for 1 full training run.
         max_steps = 30,
-        learning_rate = 2e-4, # Reduce to 2e-5 for long training runs
+        learning_rate = 1e-5, # Reduce to 2e-5 for long training runs
         logging_steps = 1,
         optim = "adamw_8bit",
         weight_decay = 0.01,
