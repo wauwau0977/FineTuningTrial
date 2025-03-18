@@ -2,6 +2,11 @@ from unsloth import FastModel
 import torch
 import json
 from datasets import Dataset
+import os
+
+os.environ["OMP_NUM_THREADS"] = "4"  # Change '4' to the desired number of CPU cores
+os.environ["MKL_NUM_THREADS"] = "4"  # Also limit MKL-based parallelism
+os.environ["TOKENIZERS_PARALLELISM"] = "false"  # Prevent Hugging Face tokenizer from spawning many processes
 
 fourbit_models = [
     # 4bit dynamic quants for superior accuracy and low memory use
@@ -25,6 +30,9 @@ model, tokenizer = FastModel.from_pretrained(
     load_in_8bit = False, # [NEW!] A bit more accurate, uses 2x memory
     full_finetuning = False, # [NEW!] We have full finetuning now!
     # token = "hf_...", # use one if using gated models
+    device_map="auto",         # Automatically place model parts on devices
+    max_memory={0: "40GiB", "cpu": "32GiB"},  # Limit memory per device
+    offload_folder="offload"   # Offload model weights to disk if needed
 )
 
 # We now add LoRA adapters so we only need to update a small amount of parameters!
