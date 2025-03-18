@@ -26,4 +26,6 @@ pgrep -f "jupyter-notebook" > /dev/null || nohup jupyter notebook > jupyter.log 
 # login hugging face
 huggingface-cli login
 
+echo -e "run now"
+echo -e "source finetune_env/bin/activate "
 

@@ -132,6 +132,7 @@ trainer = SFTTrainer(
     train_dataset = dataset,
     eval_dataset = None, # Can set up evaluation!
     args = SFTConfig(
+        dataset_num_proc=4, # limit number of processes for tokenization... goes way beyond on cloud CPU
         dataset_text_field = "text",
         per_device_train_batch_size = 2, # 2 for Medium memory GPU (<= 16GB)
         gradient_accumulation_steps = 4, # Use GA to mimic batch size!
