@@ -146,7 +146,7 @@ trainer = SFTTrainer(
         gradient_accumulation_steps = 4, # Use GA to mimic batch size!
         warmup_steps = 5,
         # num_train_epochs = 1, # Set this for 1 full training run.
-        max_steps = 150,
+        max_steps = 250,
         learning_rate = 1e-5, # Reduce to 2e-5 for long training runs
         logging_steps = 1,
         optim = "adamw_8bit",
@@ -225,7 +225,7 @@ messages = [{
     "role": "user",
     "content": [{
         "type" : "text",
-        "text" : "Was bedeuten die Wörter 'Cheibegruusig' und 'Sausiwegbini Jo' in Glattfelden?",
+        "text" : "Was bedeuten die Wörter 'Cheibegruusig' und 'Sausiwegbini Jo' in Glattfelden (Schweiz)?",
     }]
 }]
 text = tokenizer.apply_chat_template(
