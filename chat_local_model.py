@@ -7,7 +7,7 @@ from unsloth.chat_templates import get_chat_template
 model_path = "models/my-gemma-3-finetune-merged"
 
 # Load the tokenizer
-print("load tokenizer")
+print("Load tokenizer")
 tokenizer = AutoTokenizer.from_pretrained(model_path, ignore_mismatched_sizes=True)
 
 # Load the model
@@ -15,28 +15,42 @@ print("load model")
 model = AutoModelForCausalLM.from_pretrained(model_path, ignore_mismatched_sizes=True)
 if torch.cuda.is_available():
     model = model.to("cuda")
-    print("CUDA mode")
+    print("Running in CUDA mode")
 
-# Apply chat template to get tokenized prompt (as a list of IDs)
-print("About to tokenize input")
-question = "What is the capital of France?"
-messages = [{"role": "user", "content": question}]
-text = tokenizer.apply_chat_template(messages, add_generation_prompt=True)
-print(f"text chat-template: {text}")
+# Apply the chat template to the tokenizer
+tokenizer = get_chat_template(tokenizer, chat_template="gemma-3")
 
-# Convert list of token IDs into a tensor and wrap in a dict with key "input_ids"
-inputs = {"input_ids": torch.tensor([text]).to(model.device)}
-print("Text tokenized. Inputs:", inputs)
+# List of independent instructions
+instructions = [
+    "What is the capital of France?",
+    "Who wrote 'Pride and Prejudice'?",
+    "What is the boiling point of water at sea level?",
+    "Name the largest planet in our Solar System.",
+    "fantasy"
+]
 
-# Generate response
-outputs = model.generate(
-    **inputs,
-    max_new_tokens=128,
-    temperature=1.0,
-    top_p=0.95,
-    top_k=64,
-)
+print("Starting inference for multiple instructions...\n")
 
-# Decode and print the response
-response = tokenizer.decode(outputs[0], skip_special_tokens=True)
-print("Model Response:", response)
+for idx, question in enumerate(instructions, start=1):
+    print(f"--- Instruction {idx} ---")
+    
+    # Prepare the conversation using the chat template
+    messages = [{"role": "user", "content": question}]
+    text = tokenizer.apply_chat_template(messages, add_generation_prompt=True)
+    print(f"Chat-formatted prompt: {text}")
+    
+    # Convert the list of token IDs (the chat template output) into a tensor and wrap it in a dictionary
+    inputs = {"input_ids": torch.tensor([text]).to(model.device)}
+    
+    # Generate a response
+    outputs = model.generate(
+        **inputs,
+        max_new_tokens=350,
+        temperature=1.0,
+        top_p=0.95,
+        top_k=64,
+    )
+    
+    # Decode the response
+    response = tokenizer.decode(outputs[0], skip_special_tokens=True)
+    print(f"Response: {response}\n")
