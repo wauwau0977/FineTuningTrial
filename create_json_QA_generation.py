@@ -139,5 +139,5 @@ class CreateJSON_QA:
 
 if __name__ == "__main__":
     creator = CreateJSON_QA(project_name="Warmduscher")
-    #creator.run()
+    creator.run()
     creator.split_alpaca_file()
