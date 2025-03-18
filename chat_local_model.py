@@ -13,7 +13,9 @@ tokenizer = AutoTokenizer.from_pretrained(model_path, ignore_mismatched_sizes=Tr
 # Load the model
 print("load model")
 model = AutoModelForCausalLM.from_pretrained(model_path, ignore_mismatched_sizes=True)
-
+if torch.cuda.is_available():
+    model = model.to("cuda")
+    print("CUDA mode")
 
 # Apply chat template to get tokenized prompt (as a list of IDs)
 print("About to tokenize input")
