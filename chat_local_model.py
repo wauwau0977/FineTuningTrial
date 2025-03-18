@@ -23,16 +23,19 @@ tokenizer = get_chat_template(tokenizer, chat_template="gemma-3")
 # List of independent instructions
 instructions = [
     "What is the capital of France?",
-    "Who wrote 'Pride and Prejudice'?",
-    "What is the boiling point of water at sea level?",
     "Name the largest planet in our Solar System.",
-    "fantasy"
+    "Say hello in Glattfelder-Schweizer-Deutsch.",
+    "What means Kräsemäse in Glattfelderisch?",
+    "Was bedeuted Kräsemäse in Glattfelderisch?",
+    "What means 'Sausiwegbini Jo' in Glattfelder-Schweizer-Deutsch?",
+    "Was bedeutet 'Sausiwegbini Jo' in Glattfelder-Schweizer-Deutsch?"
+    "Was bedeutet 'Sausiwegbini Jo' in Glattfelden (Schweiz)?"
 ]
 
 print("Starting inference for multiple instructions...\n")
 
 for idx, question in enumerate(instructions, start=1):
-    print(f"--- Instruction {idx} ---")
+    print(f"\n--- Instruction {idx} ---")
     
     # Prepare the conversation using the chat template
     messages = [{"role": "user", "content": question}]
