@@ -4,8 +4,11 @@ import json
 from datasets import Dataset
 import os
 
-os.environ["OMP_NUM_THREADS"] = "4"  # Change '4' to the desired number of CPU cores
-os.environ["MKL_NUM_THREADS"] = "4"  # Also limit MKL-based parallelism
+
+num_proc = 4
+
+os.environ["OMP_NUM_THREADS"] = str(num_proc)  # Change '4' to the desired number of CPU cores
+os.environ["MKL_NUM_THREADS"] = str(num_proc)  # Also limit MKL-based parallelism
 os.environ["TOKENIZERS_PARALLELISM"] = "false"  # Prevent Hugging Face tokenizer from spawning many processes
 
 fourbit_models = [
@@ -118,7 +121,7 @@ def apply_chat_template(examples):
     texts = tokenizer.apply_chat_template(examples["text"])
     return {"text": texts}
 
-dataset = dataset.map(apply_chat_template, batched=True)
+dataset = dataset.map(apply_chat_template, batched=True, num_proc=num_proc )
 print(dataset[10]["text"])
 
 
@@ -132,7 +135,7 @@ trainer = SFTTrainer(
     train_dataset = dataset,
     eval_dataset = None, # Can set up evaluation!
     args = SFTConfig(
-        dataset_num_proc=4, # limit number of processes for tokenization... goes way beyond on cloud CPU
+        dataset_num_proc=num_proc, # limit number of processes for tokenization... goes way beyond on cloud CPU
         dataset_text_field = "text",
         per_device_train_batch_size = 2, # 2 for Medium memory GPU (<= 16GB)
         gradient_accumulation_steps = 4, # Use GA to mimic batch size!
@@ -194,12 +197,12 @@ print(f"Peak reserved memory for training % of max memory = {lora_percentage} %.
 
 
 # SAVE MODEL
-model.save_pretrained("my-gemma-3")  # Local saving
-tokenizer.save_pretrained("my-gemma-3")
+model.save_pretrained("models/my-gemma-3")  # Local saving
+tokenizer.save_pretrained("models/my-gemma-3")
 
 # save merged
 if True: # Change to True to save finetune!
-    model.save_pretrained_merged("gemma-3-finetune", tokenizer)
+    model.save_pretrained_merged("models/my-gemma-3-finetune", tokenizer)
 
 
 # inference
