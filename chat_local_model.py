@@ -15,25 +15,26 @@ print("load model")
 model = AutoModelForCausalLM.from_pretrained(model_path, ignore_mismatched_sizes=True)
 
 
-# Prepare the input prompt
+# Apply chat template to get tokenized prompt (as a list of IDs)
 print("About to tokenize input")
 question = "What is the capital of France?"
 messages = [{"role": "user", "content": question}]
 text = tokenizer.apply_chat_template(messages, add_generation_prompt=True)
 print(f"text chat-template: {text}")
 
-
-
+# Convert list of token IDs into a tensor and wrap in a dict with key "input_ids"
+inputs = {"input_ids": torch.tensor([text]).to(model.device)}
+print("Text tokenized. Inputs:", inputs)
 
 # Generate response
 outputs = model.generate(
-    [text],
+    **inputs,
     max_new_tokens=128,
     temperature=1.0,
     top_p=0.95,
     top_k=64,
 )
 
-# Decode response
+# Decode and print the response
 response = tokenizer.decode(outputs[0], skip_special_tokens=True)
 print("Model Response:", response)
