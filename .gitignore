@@ -4,6 +4,7 @@ learning_sources/
 learning_json/
 last_run_prepared/
 outputs/
+models/
 wandb/
 unsloth_compiled_cache/
 jupyter.log
