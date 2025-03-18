@@ -66,6 +66,9 @@ tokenizer = get_chat_template(
     chat_template = "gemma-3",
 )
 
+print("Tokenizer-Chat-Template: " +tokenizer.chat_template)
+
+
 from datasets import load_dataset
 # Load local alpaca.jsonl file
 def load_alpaca_jsonl(file_path):
