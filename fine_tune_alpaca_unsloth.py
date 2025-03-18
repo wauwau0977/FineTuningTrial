@@ -86,7 +86,9 @@ def convert_alpaca_to_gemma(alpaca_data):
     return gemma_data
 
 converted_data = convert_alpaca_to_gemma(alpaca_data)  
-dataset = Dataset.from_list(converted_data)
+dataset = Dataset.from_list([{"text": item} for item in converted_data])
+print("Converted Data Example:", converted_data[:2])  # Should print a list of formatted strings
+
 
 
 # We now use standardize_data_formats to try converting datasets to the correct format for finetuning purposes!
