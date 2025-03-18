@@ -6,6 +6,19 @@ from unsloth.chat_templates import get_chat_template
 
 model_path = "models/my-gemma-3-finetune"
 
+
+# Load the tokenizer
+print("load tokenizer")
+tokenizer = AutoTokenizer.from_pretrained(model_path, ignore_mismatched_sizes=True)
+
+# Load the model
+print("load model")
+model = AutoModelForCausalLM.from_pretrained(model_path, ignore_mismatched_sizes=True)
+
+
+print("Model loaded with huggingface standard")
+
+
 model, tokenizer = FastModel.from_pretrained(
     model_name = model_path,
     max_seq_length = 2048, # Choose any for long context!

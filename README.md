@@ -10,6 +10,9 @@ source finetune_env/bin/activate
 python3 create_json_pretraining.py 
 python3 create_json_QA_generation.py
 
+python3 fine_tune_alpaca_unsloth.py
+
+
 # useful commands:
 nvidia-smi
 

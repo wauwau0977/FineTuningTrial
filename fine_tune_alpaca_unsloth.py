@@ -206,8 +206,13 @@ model.save_pretrained("models/my-gemma-3")  # Local saving
 tokenizer.save_pretrained("models/my-gemma-3")
 
 # save merged
-if True: # Change to True to save finetune!
-    model.save_pretrained_merged("models/my-gemma-3-finetune", tokenizer)
+model.save_pretrained_merged("models/my-gemma-3-finetune-merged", tokenizer)
+
+# save gguf
+model.save_pretrained_gguf(
+        "models/my-gemma-3-finetune-gguf-q8",
+        quantization_type = "Q8_0", # For now only Q8_0, BF16, F16 supported
+)
 
 
 # inference
@@ -220,7 +225,7 @@ messages = [{
     "role": "user",
     "content": [{
         "type" : "text",
-        "text" : "Continue the sequence: 1, 1, 2, 3, 5, 8,",
+        "text" : "What do we say in Glattfelden when we are sad?",
     }]
 }]
 text = tokenizer.apply_chat_template(
@@ -234,3 +239,6 @@ outputs = model.generate(
     temperature = 1.0, top_p = 0.95, top_k = 64,
 )
 tokenizer.batch_decode(outputs)
+
+decoded_outputs = tokenizer.batch_decode(outputs, skip_special_tokens=True) #add skip special tokens
+print(decoded_outputs[0])  # Print the first (and only) decoded result
