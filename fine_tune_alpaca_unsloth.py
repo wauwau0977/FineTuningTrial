@@ -126,7 +126,7 @@ def apply_chat_template(examples):
     return {"text": texts}
 
 dataset = dataset.map(apply_chat_template, batched=True, num_proc=4 )
-print(dataset[10]["text"])
+print(dataset[3]["text"])
 
 
 
