@@ -1,5 +1,6 @@
 from unsloth import FastModel
 import torch
+import json
 
 fourbit_models = [
     # 4bit dynamic quants for superior accuracy and low memory use
@@ -40,6 +41,7 @@ model = FastModel.get_peft_model(
     random_state = 3407,
 )
 
+# TARGET SPEC FORMAT
 # <bos><start_of_turn>user
 # Hello!<end_of_turn>
 # <start_of_turn>model
@@ -52,7 +54,39 @@ tokenizer = get_chat_template(
 )
 
 from datasets import load_dataset
-dataset = load_dataset("mlabonne/FineTome-100k", split = "train")
+# Load local alpaca.jsonl file
+def load_alpaca_jsonl(file_path):
+    data = []
+    with open(file_path, 'r', encoding='utf-8') as f:
+        for line in f:
+            data.append(json.loads(line))
+    return data
+
+alpaca_data = load_alpaca_jsonl("learning_json/alpaca.jsonl")
+
+# convert alpaca to gemma instruction format
+def convert_alpaca_to_gemma(alpaca_data):
+    gemma_data = []
+    
+    for entry in alpaca_data:
+        instruction = entry.get("instruction", "").strip()
+        input_text = entry.get("input", "").strip()
+        output_text = entry.get("output", "").strip()
+        
+        # Constructing the new format
+        user_message = f"{instruction}\n{input_text}" if input_text else instruction
+        gemma_format = (
+            f"<bos><start_of_turn>user\n{user_message}<end_of_turn>\n"
+            f"<start_of_turn>model\n{output_text}<end_of_turn>"
+        )
+        
+        gemma_data.append(gemma_format)
+    
+    return gemma_data
+
+converted_data = convert_alpaca_to_gemma(alpaca_data)  
+dataset = Dataset.from_list(converted_data)
+
 
 # We now use standardize_data_formats to try converting datasets to the correct format for finetuning purposes!
 from unsloth.chat_templates import standardize_data_formats
@@ -78,7 +112,7 @@ trainer = SFTTrainer(
     eval_dataset = None, # Can set up evaluation!
     args = SFTConfig(
         dataset_text_field = "text",
-        per_device_train_batch_size = 2,
+        per_device_train_batch_size = 2, # 2 for Medium memory GPU (<= 16GB)
         gradient_accumulation_steps = 4, # Use GA to mimic batch size!
         warmup_steps = 5,
         # num_train_epochs = 1, # Set this for 1 full training run.
