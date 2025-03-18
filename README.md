@@ -18,6 +18,10 @@ nvidia-smi
 in file: ~/.tmux.conf add
 set -g mouse on
 run: tmux source-file ~/.tmux.conf
+scroll back: ctrl-b option-5
+new window: ctrl-b c
+next window: ctrl-b n
+back to shell: esc
 
 # Gemma 3
 spec: https://ai.google.dev/gemma/docs/core

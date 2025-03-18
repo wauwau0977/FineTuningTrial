@@ -1,6 +1,7 @@
 from unsloth import FastModel
 import torch
 import json
+from datasets import Dataset
 
 fourbit_models = [
     # 4bit dynamic quants for superior accuracy and low memory use
