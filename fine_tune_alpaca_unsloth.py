@@ -112,7 +112,7 @@ print(f"Total loaded entries: {len(alpaca_data)}")  # Should match number of lin
 
 # Convert data using the new conversion function
 converted_data = convert_alpaca_to_gemma(alpaca_data)
-print("Converted Data Example:", converted_data[:2])
+print("Converted Data Example:", converted_data[print_example_index])
 
 # Create the dataset (each item already has a 'text' field with the conversation structure)
 dataset = Dataset.from_list(converted_data)
@@ -146,7 +146,7 @@ trainer = SFTTrainer(
         gradient_accumulation_steps = 4, # Use GA to mimic batch size!
         warmup_steps = 5,
         # num_train_epochs = 1, # Set this for 1 full training run.
-        max_steps = 30,
+        max_steps = 150,
         learning_rate = 1e-5, # Reduce to 2e-5 for long training runs
         logging_steps = 1,
         optim = "adamw_8bit",
@@ -171,7 +171,7 @@ tokenizer.decode(trainer.train_dataset[print_example_index]["input_ids"])
 
 
 # Now let's print the masked out example - you should see only the answer is present:
-tokenizer.decode([tokenizer.pad_token_id if x == -print_example_index else x for x in trainer.train_dataset[print_example_index]["labels"]]).replace(tokenizer.pad_token, " ")
+tokenizer.decode([tokenizer.pad_token_id if x == -100 else x for x in trainer.train_dataset[print_example_index]["labels"]]).replace(tokenizer.pad_token, " ")
 
 # memory stats
 gpu_stats = torch.cuda.get_device_properties(0)
