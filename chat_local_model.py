@@ -4,7 +4,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
 from unsloth.chat_templates import get_chat_template
 
-model_path = "models/my-gemma-3-finetune"
+model_path = "models/my-gemma-3-finetune-merged"
 
 
 # Load the tokenizer
