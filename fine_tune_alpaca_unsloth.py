@@ -64,46 +64,56 @@ def load_alpaca_jsonl(file_path):
     return data
 
 alpaca_data = load_alpaca_jsonl("learning_json/alpaca.jsonl")
+print(f"Total loaded entries: {len(alpaca_data)}")  # ✅ Ensure data is loaded properly
 
-# convert alpaca to gemma instruction format
+
 def convert_alpaca_to_gemma(alpaca_data):
     gemma_data = []
     
     for entry in alpaca_data:
+        # Get and clean the fields
         instruction = entry.get("instruction", "").strip()
         input_text = entry.get("input", "").strip()
         output_text = entry.get("output", "").strip()
-        
-        # Constructing the new format
+
+        # Concatenate instruction and input if input exists
         user_message = f"{instruction}\n{input_text}" if input_text else instruction
-        gemma_format = (
-            f"<bos><start_of_turn>user\n{user_message}<end_of_turn>\n"
-            f"<start_of_turn>model\n{output_text}<end_of_turn>"
-        )
+
+        # Build a structured conversation without any special tokens.
+        # The chat template later will add the necessary formatting tokens.
+        conversation = [
+            {"role": "user", "content": user_message},
+            {"role": "assistant", "content": output_text}
+        ]
         
-        gemma_data.append(gemma_format)
+        gemma_data.append({"text": conversation})
     
     return gemma_data
 
-converted_data = convert_alpaca_to_gemma(alpaca_data)  
-dataset = Dataset.from_list([{"text": item} for item in converted_data])
-print("Converted Data Example:", converted_data[:2])  # Should print a list of formatted strings
+# Load Alpaca data as before
+alpaca_data = load_alpaca_jsonl("learning_json/alpaca.jsonl")
+print(f"Total loaded entries: {len(alpaca_data)}")  # Should match number of lines
 
+# Convert data using the new conversion function
+converted_data = convert_alpaca_to_gemma(alpaca_data)
+print("Converted Data Example:", converted_data[:2])
 
+# Create the dataset (each item already has a 'text' field with the conversation structure)
+dataset = Dataset.from_list(converted_data)
 
-# We now use standardize_data_formats to try converting datasets to the correct format for finetuning purposes!
+# Standardize the data formats (if needed by your finetuning procedure)
 from unsloth.chat_templates import standardize_data_formats
 dataset = standardize_data_formats(dataset)
 
-
-# We now have to apply the chat template for Gemma-3 onto the conversations, and save it to text
+# Apply the chat template to add the correct tokens
 def apply_chat_template(examples):
-    texts = tokenizer.apply_chat_template(examples["conversations"])
-    return { "text" : texts }
-pass
-dataset = dataset.map(apply_chat_template, batched = True)
+    texts = tokenizer.apply_chat_template(examples["text"])
+    return {"text": texts}
 
-print(dataset[100]["text"])
+dataset = dataset.map(apply_chat_template, batched=True)
+print(dataset[10]["text"])
+
+
 
 
 # Now let's use Huggingface TRL's SFTTrainer! More docs here: TRL SFT docs. We do 60 steps to speed things up, but you can set num_train_epochs=1 for a full run, and turn off max_steps=None.
