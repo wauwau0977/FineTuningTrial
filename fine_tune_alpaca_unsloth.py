@@ -43,7 +43,7 @@ model, tokenizer = FastModel.from_pretrained(
 # We now add LoRA adapters so we only need to update a small amount of parameters!
 model = FastModel.get_peft_model(
     model,
-    finetune_vision_layers     = False, # Turn off for just text!
+    finetune_vision_layers     = True, # HACK, TODO, allow load? Turn off for just text!
     finetune_language_layers   = True,  # Should leave on!
     finetune_attention_modules = True,  # Attention good for GRPO
     finetune_mlp_modules       = True,  # SHould leave on always!
@@ -167,11 +167,13 @@ trainer = train_on_responses_only(
 )
 
 #  textLet's verify masking the instruction part is done! Let's print the 100th row again:
-tokenizer.decode(trainer.train_dataset[print_example_index]["input_ids"])
+dMasking = tokenizer.decode(trainer.train_dataset[print_example_index]["input_ids"])
+print(f"debug masking: {dMasking}")
 
 
 # Now let's print the masked out example - you should see only the answer is present:
-tokenizer.decode([tokenizer.pad_token_id if x == -100 else x for x in trainer.train_dataset[print_example_index]["labels"]]).replace(tokenizer.pad_token, " ")
+dAnswer = tokenizer.decode([tokenizer.pad_token_id if x == -100 else x for x in trainer.train_dataset[print_example_index]["labels"]]).replace(tokenizer.pad_token, " ")
+print(f"debug answer: {dAnswer}")
 
 # memory stats
 gpu_stats = torch.cuda.get_device_properties(0)
