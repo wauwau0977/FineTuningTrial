@@ -38,7 +38,7 @@ def run_inference(model_path, questions):
                 max_new_tokens=256,
                 do_sample=True,
                 top_k=10, # 50 some say 0 is better.. lower seems more precise... 
-                top_p=0.95,
+                top_p=0.9, # 0.95 orig
                 eos_token_id=tokenizer.eos_token_id,  # Ensure generation stops at EOS
                 pad_token_id=tokenizer.eos_token_id,  # Use EOS as pad token (consistent)
             )

@@ -76,9 +76,9 @@ for split in ["train", "test"]:
 # -----------------------
 logger.info("Applying LoRA configuration...")
 lora_config = LoraConfig(
-    r=8,
-    lora_alpha=16,
-    lora_dropout=0.1,
+    r=16,
+    lora_alpha=32, # twice value of r
+    lora_dropout=0.05,
     task_type="CAUSAL_LM",
     bias="none",
     target_modules=[
@@ -123,7 +123,7 @@ training_args = TrainingArguments(
     gradient_accumulation_steps=4,
     #num_train_epochs=50,
     max_steps=200,
-    learning_rate=2e-5,
+    learning_rate=5e-5,
     weight_decay=0.01,
     fp16=True,
     logging_steps=1,
