@@ -106,34 +106,47 @@ class CreateJSON_QA:
         ]
 
     def run(self):
-        os.makedirs(os.path.dirname(self.OUTPUT_FILE), exist_ok=True) #added to assure directory exists.
+        os.makedirs(os.path.dirname(self.OUTPUT_FILE), exist_ok=True)
 
         with open(self.FILE_PATH, "r", encoding="utf-8") as file, open(self.OUTPUT_FILE, "w", encoding="utf-8") as output:
             for line in file:
                 data = json.loads(line)
                 raw_code = data["text"]
                 
-                for intro in self.intros:
+                for i, intro in enumerate(self.intros):
                     question = f"{intro}\n\n{raw_code}"
                     start_time = time.time()
                     answer = self.gemma.inference(question)
                     generation_time = time.time() - start_time
-                    
+
                     print(f"Q: {question[:500]}...\n")
                     print(f"A: {answer}...\n")
                     print(f"Generation time: {generation_time:.2f} seconds\n")
                     print("-" * 80, "\n")
-                    
+
                     if answer is None:
-                        print("Answer for question was None (Null), skipping...  question= \n {question} ß")
+                        print(f"Answer for question {i+1} was None (Null), skipping...  question= \n {question} ß")
                         continue
 
                     job = f"You are a developer of project '{self.project_name}'. It's your task to implement according to the specification below"
 
-                    output_entry = {
-                        "instruction": job + answer,
-                        "output": raw_code
-                    }
+                    if i == 0:  # Question 1
+                        output_entry = {
+                            "instruction": job + answer,
+                            "output": raw_code
+                        }
+                    elif i in [1, 2]:  # Question 2 and 3
+                        try:
+                            json_answer = json.loads(answer)
+                            for item in json_answer:
+                                output.write(json.dumps(item) + "\n")
+                            continue
+                        except json.JSONDecodeError as e:
+                            print(f"Error decoding JSON for question {i+1}: {e}")
+                            continue
+                        except Exception as e:
+                            print(f"An unexpected error occurred for question {i+1}: {e}")
+                            continue
 
                     output.write(json.dumps(output_entry) + "\n")
                     output.flush()
@@ -163,4 +176,4 @@ class CreateJSON_QA:
 if __name__ == "__main__":
     creator = CreateJSON_QA(project_name="Warmduscher")
     creator.run()
-    creator.split_alpaca_file()
+    #creator.split_alpaca_file()
