@@ -131,9 +131,10 @@ training_args = TrainingArguments(
     optim="adamw_torch",
     dataloader_num_workers=4,
     gradient_checkpointing=True,
-    evaluation_strategy="steps",
+    eval_strategy="steps",
     eval_steps=50,
     do_eval=True,
+    label_names=["labels"],  # Explicitly set the label names
 )
 
 # -----------------------
