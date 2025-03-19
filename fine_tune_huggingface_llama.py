@@ -176,12 +176,13 @@ questions = [
 for question in questions:
     messages = [{"role": "user", "content": question}]
     prompt = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+    print(f"promt: {prompt}")
     inputs = tokenizer(prompt, return_tensors="pt").to(device)
 
     with torch.no_grad():
         outputs = model.generate(**inputs, max_new_tokens=256, do_sample=True, top_k=50, top_p=0.95, eos_token_id=tokenizer.eos_token_id)
 
     response = tokenizer.decode(outputs[0][inputs["input_ids"].shape[1]:], skip_special_tokens=True)
-    print(f"Question: {question}\nAnswer: {response}\n")
+    print(f"Question: {question}\nAnswer: {response}\n\n\n")
 
 logger.info("Inference complete.")
