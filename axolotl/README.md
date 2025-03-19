@@ -29,7 +29,7 @@ How does the main class work?<|im_end|>
 
 # axolotl train /workspace/FineTuningTrial/axolotl/config2.yml
 
-
+axolotl inference /workspace/data/FineTuningTrial/axolotl/config3_lora.yml --lora-model-dir="outputs/out/lora-llama3.1-8B" --gradio
 
 axolotl inference /workspace/FineTuningTrial/axolotl/config2.yml --lora-model-dir="./outputs/model-out-my-01-tiny-llama-1B-v2" --gradio
 
@@ -57,6 +57,9 @@ axolotl train /workspace/data/FineTuningTrial/axolotl/config4.yml
 
 # Reference
 tiny-llama/pretrain.yml
+
+
+
 
 
 # Promting
