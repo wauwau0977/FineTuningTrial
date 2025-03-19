@@ -152,13 +152,15 @@ class CreateJSON_QA:
                     if i == 0:  # Question 1
                         output_entry = {
                             "instruction": job + answer,
-                            "output": raw_code
+                            "output": raw_code,
+                            "questionType": i
                         }
                         output.write(json.dumps(output_entry) + "\n")
                         output.flush()
                     elif i in [1, 2]:  # Question 2 and 3
                         qa_pairs = self.extract_qa_from_llm_output(answer)
                         for qa in qa_pairs:
+                            qa["questionType"] = i
                             output.write(json.dumps(qa) + "\n")
                         output.flush()
 
@@ -171,9 +173,10 @@ class CreateJSON_QA:
                 entry = json.loads(line)
                 instruction = entry["instruction"]
                 output_code = entry["output"]
+                question_type = entry.get("questionType", "unknown")
 
-                instruction_filename = os.path.join(self.OUTPUT_DIR, f"{count:06d}_instruction.md")
-                output_filename = os.path.join(self.OUTPUT_DIR, f"{count:06d}_output.md")
+                instruction_filename = os.path.join(self.OUTPUT_DIR, f"{count:06d}_instruction_Q{question_type}.md")
+                output_filename = os.path.join(self.OUTPUT_DIR, f"{count:06d}_output_Q{question_type}.md")
 
                 print(f"Write split file {instruction_filename} and {output_filename}.")
 
@@ -187,4 +190,4 @@ class CreateJSON_QA:
 if __name__ == "__main__":
     creator = CreateJSON_QA(project_name="Warmduscher")
     creator.run()
-    #creator.split_alpaca_file()
+    creator.split_alpaca_file()
