@@ -7,6 +7,7 @@ from transformers import (
     Trainer,
     TrainingArguments,
     DataCollatorForLanguageModeling,
+    EarlyStoppingCallback,
 )
 from datasets import load_dataset
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
@@ -122,7 +123,7 @@ training_args = TrainingArguments(
     per_device_train_batch_size=2,
     gradient_accumulation_steps=4,
     #num_train_epochs=50,
-    max_steps=140,
+    max_steps=5,
     learning_rate=5e-5,
     weight_decay=0.01,
     fp16=True,
@@ -132,14 +133,13 @@ training_args = TrainingArguments(
     optim="adamw_torch",
     dataloader_num_workers=4,
     gradient_checkpointing=True,
-    eval_strategy="steps",
+    eval_strategy="epoch",
     eval_steps=3,
     do_eval=True,
     label_names=["labels"],  # Explicitly set the label names
     greater_is_better=False,      # Lower eval_loss is better
     load_best_model_at_end=True,
     metric_for_best_model="eval_loss",
-    patience=5, # do not continue if eval won't get better
 )
 
 # -----------------------
@@ -155,6 +155,7 @@ trainer = Trainer(
     train_dataset=dataset["train"].map(tokenize_and_format, batched=True, remove_columns=["messages"], num_proc=4),
     eval_dataset=dataset["test"].map(tokenize_and_format, batched=True, remove_columns=["messages"], num_proc=4),
     data_collator=data_collator,
+    callbacks=[EarlyStoppingCallback(early_stopping_patience=5)],
 )
 
 logger.info("Starting training...")
@@ -176,18 +177,51 @@ questions = [
     "What is the capital of France?",
     "What means Kräsemäse in Glattfelderisch?",
     "'Jaudihaudi Jo' in Glattfelden Switzerland what does that mean?",
+    "In Glattfelderisch say 'super cool'.",
+    "In Glattfelden, Switzerland, what language do they use?",  # Rephrased
+    "What means the word 'Cheibegruusig' in Glattfelden (Switzerland)", # REVERSE LOGIC
+    "Was heisst 'Cheibegruusig' in Glattfelderisch?", # REVERSE LOGIC and LANGUAGE SWITCH
+    "In Glattfelder-Schweizer-Deutsch what means 'Sausiwegbini Jo'?", # REVERSE
 ]
+
+# Store prompts, responses, and timings
+results = []
 
 for question in questions:
     messages = [{"role": "user", "content": question}]
     prompt = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
-    print(f"promt: {prompt}")
     inputs = tokenizer(prompt, return_tensors="pt").to(device)
 
     with torch.no_grad():
-        outputs = model.generate(**inputs, max_new_tokens=256, do_sample=True, top_k=50, top_p=0.95, eos_token_id=tokenizer.eos_token_id)
+        start_time = torch.cuda.Event(enable_timing=True) # more precise than time.time()
+        end_time = torch.cuda.Event(enable_timing=True)
+        start_time.record()
+        outputs = model.generate(
+            **inputs,
+            max_new_tokens=256,
+            do_sample=True,
+            top_k=50,
+            top_p=0.95,
+            temperature=0.7,
+            repetition_penalty=1.2,
+            eos_token_id=tokenizer.eos_token_id,
+            pad_token_id=tokenizer.eos_token_id
+        )
+        end_time.record()
+        torch.cuda.synchronize() # Wait for the events to be recorded!
+        elapsed_time_ms = start_time.elapsed_time(end_time) # measure time
 
     response = tokenizer.decode(outputs[0][inputs["input_ids"].shape[1]:], skip_special_tokens=True)
-    print(f"Question: {question}\nAnswer: {response}\n\n\n")
+    print(f"Question: {question}")
+    print(f"Answer: {response}")
+    print(f"-------------------------------------------------------- {elapsed_time_ms:.2f} ms\n")
+
+    results.append((question, prompt, response, elapsed_time_ms))
+
+
+print("\nPrompts:")
+for _, prompt, _, _ in results:
+    print(prompt)
 
 logger.info("Inference complete.")
+
