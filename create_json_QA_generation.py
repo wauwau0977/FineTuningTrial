@@ -106,7 +106,7 @@ class CreateJSON_QA:
             """
         ]
 
-    def extract_json_from_llm_output(llm_output):
+    def extract_json_from_llm_output(self, llm_output): # added self here.
         json_objects = []
         json_pattern = re.compile(r'\{.*\}', re.DOTALL)  # Matches anything between curly braces
 
@@ -157,8 +157,7 @@ class CreateJSON_QA:
                         }
                     elif i in [1, 2]:  # Question 2 and 3
                         try:
-                            answer_llm = json.loads(answer)
-                            json_objects = extract_json_from_llm_output(answer_llm) # extract all valid json objects.
+                            json_objects = self.extract_json_from_llm_output(answer) # extract all valid json objects. changed here.
                             
                             for item in json_objects:
                                 output.write(json.dumps(item) + "\n")
