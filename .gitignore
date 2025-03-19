@@ -7,5 +7,6 @@ outputs/
 models/
 wandb/
 unsloth_compiled_cache/
+llama.cpp/
 jupyter.log
 *.log

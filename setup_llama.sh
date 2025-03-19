@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Set working directory
-INSTALL_DIR="./llama.cpp"
+# Set working directory to current working directory
+INSTALL_DIR="$PWD/llama.cpp"
 
 # Clone llama.cpp if it does not exist
 if [ ! -d "$INSTALL_DIR" ]; then
@@ -12,17 +12,17 @@ else
     cd "$INSTALL_DIR" && git pull
 fi
 
-# Navigate to directory
-cd "$INSTALL_DIR"
+# Navigate into the llama.cpp directory
+cd "$INSTALL_DIR" || { echo "Failed to cd into $INSTALL_DIR"; exit 1; }
 
 # Build using CMake
 echo "Building llama.cpp..."
 mkdir -p build && cd build
-cmake ..
-cmake --build . --config Release
+cmake .. || { echo "CMake configuration failed."; exit 1; }
+cmake --build . --config Release || { echo "Build failed."; exit 1; }
 
-# Add llama.cpp bin directory to PATH in .bashrc or .zshrc
-echo "Adding llama.cpp/bin to system PATH..."
+# Add llama.cpp/build/bin directory to PATH in your shell configuration
+echo "Adding llama.cpp/build/bin to system PATH..."
 if [[ $SHELL == *"zsh"* ]]; then
     SHELL_CONFIG="$HOME/.zshrc"
 elif [[ $SHELL == *"bash"* ]]; then
@@ -31,7 +31,6 @@ else
     SHELL_CONFIG="$HOME/.profile"
 fi
 
-# Add export PATH line if it's not already in the shell config
 if ! grep -q "export PATH=\$PATH:$INSTALL_DIR/build/bin" "$SHELL_CONFIG"; then
     echo "export PATH=\$PATH:$INSTALL_DIR/build/bin" >> "$SHELL_CONFIG"
 fi
@@ -39,7 +38,7 @@ fi
 # Apply changes to current shell session
 export PATH=$PATH:$INSTALL_DIR/build/bin
 
-# Verify installation
+# Verify installation of llama-quantize
 echo "Verifying llama-quantize installation..."
 if command -v llama-quantize &> /dev/null; then
     echo "✅ llama-quantize is now available!"
