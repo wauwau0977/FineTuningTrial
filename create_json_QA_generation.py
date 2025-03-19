@@ -2,13 +2,12 @@ import time
 import json
 import os
 import re
-# from gemma3_inference import GemmaInference
-from gemma3_inference_ollama import GemmaInferenceOllama  # Assuming the previous class is in gemma_inference.py
+from gemma3_inference_ollama import GemmaInferenceOllama
 
 class CreateJSON_QA:
     FILE_PATH = "learning_json/pretrain_dataset.jsonl"
     OUTPUT_FILE = "learning_json/alpaca.jsonl"
-    OUTPUT_DIR = "learning_json/alpaca_split"  # Subdirectory for split files
+    OUTPUT_DIR = "learning_json/alpaca_split"
 
     def __init__(self, project_name='Warmduscher'):
         self.project_name = project_name
@@ -90,8 +89,11 @@ class CreateJSON_QA:
             {{QUESTION}}...
 
             Replace FILE_LOCATION and FILE_NAME with the given below... then directly write the best answer you can imagine to the question... 
-            now, for your response: directly response. no introduction. format each question and answer pair as Alpaca LLM format in JSONL... 
-            the structure  is {{"instruction": "{{QUESTION}}", "output": "{{ANSWER}}" }}
+            now, for your response: directly response. no introduction. format each question and answer pair using the following syntax:
+            ***** MY_QUESTION
+            {{QUESTION}}
+            ***** MY_ANSWER
+            {{ANSWER}}
             """,
             #### QUESTION 3 ####
             f"""
@@ -101,29 +103,26 @@ class CreateJSON_QA:
             {{QUESTION}}...
 
             Replace FILE_LOCATION and FILE_NAME with the given below... then directly write the best answer you can imagine to the question... 
-            now, for your response: directly response. no introduction. format each question and answer pair as Alpaca LLM format in JSONL... 
-            the structure  is {{"instruction": "{{QUESTION}}", "output": "{{ANSWER}}" }}
+            now, for your response: directly response. no introduction. format each question and answer pair using the following syntax:
+            ***** MY_QUESTION
+            {{QUESTION}}
+            ***** MY_ANSWER
+            {{ANSWER}}
             """
         ]
 
-    def extract_json_from_llm_output(self, llm_output): # added self here.
-        json_objects = []
-        json_pattern = re.compile(r'\{.*\}', re.DOTALL)  # Matches anything between curly braces
+    def extract_qa_from_llm_output(self, llm_output):
+        qa_pairs = []
+        question_pattern = re.compile(r'\*{5} MY_QUESTION\n(.*?)\n\*{5} MY_ANSWER', re.DOTALL)
+        answer_pattern = re.compile(r'\*{5} MY_ANSWER\n(.*?)(?=\n\*{5} MY_QUESTION|\Z)', re.DOTALL)
 
-        matches = json_pattern.findall(llm_output)
+        questions = question_pattern.findall(llm_output)
+        answers = answer_pattern.findall(llm_output)
 
-        for match in matches:
-            try:
-                json_obj = json.loads(match)
-                json_objects.append(json_obj)
-            except json.JSONDecodeError:
-                print(f"Warning: Could not decode JSON from match: {match}")
-                continue #skip to next match if json decoding fails
-            except Exception as e:
-                print(f"Warning: An unexpected error occured during JSON parsing: {e}")
-                continue
+        for q, a in zip(questions, answers):
+            qa_pairs.append({"instruction": q.strip(), "output": a.strip()})
 
-        return json_objects        
+        return qa_pairs
 
     def run(self):
         os.makedirs(os.path.dirname(self.OUTPUT_FILE), exist_ok=True)
@@ -155,26 +154,16 @@ class CreateJSON_QA:
                             "instruction": job + answer,
                             "output": raw_code
                         }
+                        output.write(json.dumps(output_entry) + "\n")
+                        output.flush()
                     elif i in [1, 2]:  # Question 2 and 3
-                        try:
-                            json_objects = self.extract_json_from_llm_output(answer) # extract all valid json objects. changed here.
-                            
-                            for item in json_objects:
-                                output.write(json.dumps(item) + "\n")
-                            continue
-                        except json.JSONDecodeError as e:
-                            print(f"Error decoding JSON for question {i+1}: {e}")
-                            continue
-                        except Exception as e:
-                            print(f"An unexpected error occurred for question {i+1}: {e}")
-                            continue
-
-                    output.write(json.dumps(output_entry) + "\n")
-                    output.flush()
-
+                        qa_pairs = self.extract_qa_from_llm_output(answer)
+                        for qa in qa_pairs:
+                            output.write(json.dumps(qa) + "\n")
+                        output.flush()
 
     def split_alpaca_file(self):
-        os.makedirs(self.OUTPUT_DIR, exist_ok=True)  # Create split directory if it doesn't exist
+        os.makedirs(self.OUTPUT_DIR, exist_ok=True)
 
         with open(self.OUTPUT_FILE, "r", encoding="utf-8") as alpaca_file:
             count = 1
