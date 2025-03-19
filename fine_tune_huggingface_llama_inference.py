@@ -61,13 +61,18 @@ if __name__ == "__main__":
     lora_finetuned_path = "models/my-llama3-finetuned"  # LoRA fine-tuned model path
 
     questions_list = [
+        "What is the Warmduscher Project. Explain what it is.",
+        "How is the data in Warmduscher Project exactly read from the device and where does it go. Explain in detail!",
+        "Explain for Project 'Warmduscher' what the class MeteoSwissService is doing.",
+        "Explain for Project 'Warmduscher' what the class MySessionFilter is doing, and what other project classes it does reference.",
+        "Explain for Project 'Warmduscher' what the class MyRequestInterceptor is functionally working, and what other project classes it does reference.",
         "What is the capital of France?",
         "What means Kräsemäse in Glattfelderisch?",
         "'Jaudihaudi Jo' in Glattfelden Switzerland what does that mean?",
         "In Glattfelden, Switzerland, what language do they use?",
         "What means the word 'Cheibegruusig' in Glattfelden (Switzerland)?",
         "Was heisst 'Cheibegruusig' in Glattfelderisch?",
-        "In Glattfelder-Schweizer-Deutsch what means 'Sausiwegbini Jo'?"
+        "In Glattfelder-Schweizer-Deutsch what means 'Sausiwegbini Jo'?",
     ]
 
     run_inference(lora_finetuned_path, questions_list)

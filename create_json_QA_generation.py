@@ -14,6 +14,7 @@ class CreateJSON_QA:
         self.gemma = GemmaInferenceOllama()
 
         self.intros = [
+             #### QUESTION 1 ####
             f"""
             Your task is to write an IT specification for the given source code class below, which is part of the project '{self.project_name}'. 
             The IT specification shall follow the structure below. If an item of the spec is not applicable just leave it empty.
@@ -79,6 +80,28 @@ class CreateJSON_QA:
             - **Scalability Considerations:** Recommend changes for future scalability.
 
             Source code below:
+            """, 
+            #### QUESTION 2 ####
+            f"""
+            For the source code below. Write 5 questions for a developer interview.  Focus on different areas on the code...
+            
+            The questions must always begin with: For Project '{self.project_name}' considering file in path '{{FILE_LOCATION}}' with name '{{FILE_NAME}}'... 
+            {{QUESTION}}...
+
+            Replace FILE_LOCATION and FILE_NAME with the given below... then directly write the best answer you can imagine to the question... 
+            now, for your response: directly response. no introduction. format each question and answer pair as Alpaca LLM format in JSONL... 
+            the structure  is {{"instruction": "{{QUESTION}}", "output": "{{ANSWER}}" }}
+            """,
+            #### QUESTION 3 ####
+            f"""
+            For the source code below: Write 5 questions for a developer interview. The candidate is given a quick overview. Then the questions itself shall cover different areas of the code. The question itself contains a part of the code (e.g. a method, or partial method, or some other partials) which are shown..
+            
+            The questions must always begin with: For Project '{self.project_name}' considering file in path '{{FILE_LOCATION}}' with name '{{FILE_NAME}}'... 
+            {{QUESTION}}...
+
+            Replace FILE_LOCATION and FILE_NAME with the given below... then directly write the best answer you can imagine to the question... 
+            now, for your response: directly response. no introduction. format each question and answer pair as Alpaca LLM format in JSONL... 
+            the structure  is {{"instruction": "{{QUESTION}}", "output": "{{ANSWER}}" }}
             """
         ]
 
