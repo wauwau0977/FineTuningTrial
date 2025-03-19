@@ -122,7 +122,7 @@ training_args = TrainingArguments(
     per_device_train_batch_size=2,
     gradient_accumulation_steps=4,
     #num_train_epochs=50,
-    max_steps=200,
+    max_steps=140,
     learning_rate=5e-5,
     weight_decay=0.01,
     fp16=True,
@@ -136,6 +136,10 @@ training_args = TrainingArguments(
     eval_steps=3,
     do_eval=True,
     label_names=["labels"],  # Explicitly set the label names
+    greater_is_better=False,      # Lower eval_loss is better
+    load_best_model_at_end=True,
+    metric_for_best_model="eval_loss",
+    patience=5, # do not continue if eval won't get better
 )
 
 # -----------------------
