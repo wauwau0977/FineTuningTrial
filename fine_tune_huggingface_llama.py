@@ -1,6 +1,13 @@
 import torch
 import logging
-from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig, Trainer, TrainingArguments, DataCollatorForSeq2Seq
+from transformers import (
+    AutoModelForCausalLM,
+    AutoTokenizer,
+    BitsAndBytesConfig,
+    Trainer,
+    TrainingArguments,
+    DataCollatorForLanguageModeling,
+)
 from datasets import load_dataset
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
 import os
@@ -11,7 +18,7 @@ import os
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-logger.info("Starting the fine-tuning script...")
+logger.info("Starting fine-tuning...")
 
 # -----------------------
 # Load Model & Tokenizer with 4-bit Quantization
@@ -32,24 +39,19 @@ model = AutoModelForCausalLM.from_pretrained(
     device_map="auto"
 )
 
-# Prepare for k-bit training
-model = prepare_model_for_kbit_training(model)
-model.config.use_cache = False
-model.config.pretraining_tp = 1
-
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 tokenizer.pad_token = tokenizer.eos_token
 tokenizer.padding_side = "right"
 
-logger.info("Model and tokenizer loaded successfully.")
+logger.info(f"Model loaded on device: {model.device}")
 
 # -----------------------
-# Load and Format Dataset (Alpaca Style)
+# Load and Format Dataset
 # -----------------------
-logger.info("Loading dataset...")
 dataset = load_dataset("json", data_files="learning_json/alpaca.jsonl")["train"]
 dataset = dataset.train_test_split(test_size=0.1, seed=42)
-logger.info(f"Dataset split into train ({len(dataset['train'])}) and test ({len(dataset['test'])})")
+
+logger.info(f"Dataset train size: {len(dataset['train'])}, test size: {len(dataset['test'])}")
 
 def format_alpaca(example):
     instruction = example.get("instruction", "").strip()
@@ -63,17 +65,14 @@ def format_alpaca(example):
         ]
     }
 
-# --- Robust Column Removal ---
 for split in ["train", "test"]:
-    columns_to_remove = ["instruction", "input", "output"]
-    existing_columns = dataset[split].column_names
-    columns_to_remove = [col for col in columns_to_remove if col in existing_columns]
-    dataset[split] = dataset[split].map(format_alpaca, remove_columns=columns_to_remove)
-
-logger.info(f"First formatted training example: {dataset['train'][0]}")
+    dataset[split] = dataset[split].map(
+        format_alpaca,
+        remove_columns=[col for col in ["instruction", "input", "output"] if col in dataset[split].column_names]
+    )
 
 # -----------------------
-# Apply LoRA
+# LoRA and k-bit setup
 # -----------------------
 logger.info("Applying LoRA configuration...")
 lora_config = LoraConfig(
@@ -83,57 +82,46 @@ lora_config = LoraConfig(
     task_type="CAUSAL_LM",
     bias="none",
     target_modules=[
-        "q_proj",
-        "k_proj",
-        "v_proj",
-        "o_proj",
-        "gate_proj",
-        "up_proj",
-        "down_proj",
+        "q_proj", "k_proj", "v_proj", "o_proj",
+        "gate_proj", "up_proj", "down_proj",
     ],
 )
 
+# Correct order: first prepare model, then apply LoRA
+model = prepare_model_for_kbit_training(model)
+model.config.use_cache = False
+model.config.pretraining_tp = 1
+
 model = get_peft_model(model, lora_config)
-logger.info("LoRA applied to model.")
+
 model.print_trainable_parameters()
+
 
 # -----------------------
 # Tokenization
 # -----------------------
-
 def tokenize_and_format(examples):
-    formatted_texts = []
-
-    for messages in examples["messages"]:
-        formatted_text = tokenizer.apply_chat_template(messages, tokenize=False)
-        formatted_texts.append(formatted_text)
-
+    formatted_texts = [
+        tokenizer.apply_chat_template(msg, tokenize=False)
+        for msg in examples["messages"]
+    ]
     tokenized_inputs = tokenizer(
         formatted_texts,
         padding="max_length",
         truncation=True,
-        max_length=512,
-        return_tensors="pt"
+        max_length=512
     )
-
-    tokenized_inputs["labels"] = tokenized_inputs["input_ids"].clone()
+    tokenized_inputs["labels"] = tokenized_inputs["input_ids"].copy()
     return tokenized_inputs
 
 # -----------------------
 # Training Arguments
 # -----------------------
-logger.info("Setting up training arguments...")
-
-output_dir = "./outputs"
-if not os.path.exists(output_dir):
-    os.makedirs(output_dir)
-
-
 training_args = TrainingArguments(
-    output_dir=output_dir,
+    output_dir="./outputs",
     per_device_train_batch_size=2,
     gradient_accumulation_steps=4,
-    num_train_epochs=10,
+    num_train_epochs=20,
     learning_rate=2e-5,
     weight_decay=0.01,
     fp16=True,
@@ -144,18 +132,19 @@ training_args = TrainingArguments(
     dataloader_num_workers=4,
     gradient_checkpointing=True,
     evaluation_strategy="steps",
-    eval_steps=1,
+    eval_steps=50,
     do_eval=True,
 )
 
 # -----------------------
 # Trainer
 # -----------------------
-logger.info("Initializing `Trainer`...")
-data_collator = DataCollatorForSeq2Seq(tokenizer=tokenizer, model=model, padding=True)
+data_collator = DataCollatorForLanguageModeling(
+    tokenizer=tokenizer, mlm=False
+)
 
 trainer = Trainer(
-    model=model,  # Pass the model to the Trainer
+    model=model,
     args=training_args,
     train_dataset=dataset["train"].map(tokenize_and_format, batched=True, remove_columns=["messages"], num_proc=4),
     eval_dataset=dataset["test"].map(tokenize_and_format, batched=True, remove_columns=["messages"], num_proc=4),
@@ -164,33 +153,19 @@ trainer = Trainer(
 
 logger.info("Starting training...")
 trainer.train()
-logger.info("Training completed.")
 
 # -----------------------
-# Save Model  (Only save after training)
+# Save Model
 # -----------------------
-logger.info("Saving fine-tuned model...")
-final_model_dir = "models/my-llama3-finetuned"
-model.save_pretrained(final_model_dir)  # Save the *trained* model
-tokenizer.save_pretrained(final_model_dir)
-logger.info("Fine-tuning complete! Model saved successfully.")
+model.save_pretrained("models/my-llama3-finetuned")
+tokenizer.save_pretrained("models/my-llama3-finetuned")
 
 # -----------------------
-# Inference (Use the trained model directly)
+# Inference
 # -----------------------
-
-logger.info("Starting inference...")
-
-#  NO model loading here. We use the 'model' from training.
-
-# Move model to GPU if available (important to do this *after* LoRA)
-if torch.cuda.is_available():
-    model = model.to("cuda")  # Move the *trained* model
-
-# Set model to evaluation mode
 model.eval()
+device = model.device
 
-# Define questions
 questions = [
     "What is the capital of France?",
     "What means Kräsemäse in Glattfelderisch?",
@@ -200,16 +175,12 @@ questions = [
 for question in questions:
     messages = [{"role": "user", "content": question}]
     prompt = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
-    inputs = tokenizer(prompt, return_tensors="pt")
-
-    if torch.cuda.is_available():
-        inputs = {k: v.to("cuda") for k, v in inputs.items()}
+    inputs = tokenizer(prompt, return_tensors="pt").to(device)
 
     with torch.no_grad():
-        outputs = model.generate(**inputs, max_new_tokens=150, do_sample=True, top_k=50, top_p=0.95)
+        outputs = model.generate(**inputs, max_new_tokens=256, do_sample=True, top_k=50, top_p=0.95, eos_token_id=tokenizer.eos_token_id)
 
-    response = tokenizer.decode(outputs[0], skip_special_tokens=True)
-    print(f"Question: {question}")
-    print(f"Answer: {response}\n")
+    response = tokenizer.decode(outputs[0][inputs["input_ids"].shape[1]:], skip_special_tokens=True)
+    print(f"Question: {question}\nAnswer: {response}\n")
 
 logger.info("Inference complete.")
