@@ -2,10 +2,19 @@
 # !pip install transformers peft torch accelerate datasets bitsandbytes
 
 import torch
+import logging
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 from datasets import load_dataset
 from peft import LoraConfig, get_peft_model
 from transformers import TrainingArguments, Trainer, DataCollatorForLanguageModeling
+
+# -----------------------
+# Debug Logging Setup
+# -----------------------
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+logger.info("Starting the fine-tuning script...")
 
 # -----------------------
 # Load Model & Tokenizer with 4-bit Quantization
@@ -20,6 +29,7 @@ quantization_config = BitsAndBytesConfig(
 )
 
 # Load the model with the quantization configuration
+logger.info("Loading model and tokenizer...")
 model = AutoModelForCausalLM.from_pretrained(
     model_name,
     quantization_config=quantization_config,  # Apply the quantization config
@@ -30,14 +40,17 @@ model = AutoModelForCausalLM.from_pretrained(
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 tokenizer.pad_token = tokenizer.eos_token  # Ensure proper padding
 
+logger.info("Model and tokenizer loaded successfully.")
+
 # -----------------------
 # Load and Format Dataset (Alpaca Style)
 # -----------------------
-# Load dataset
+logger.info("Loading dataset...")
 dataset = load_dataset("json", data_files="learning_json/alpaca.jsonl")["train"]
 
 # Ensure dataset has both "train" and "test" splits
 dataset = dataset.train_test_split(test_size=0.1, seed=42)
+logger.info(f"Dataset split into train ({len(dataset['train'])}) and test ({len(dataset['test'])})")
 
 # Function to format data properly
 def format_alpaca(example):
@@ -50,14 +63,21 @@ def format_alpaca(example):
     
     return {"text": formatted_text}
 
-# Apply formatting function
+logger.info("Applying formatting function to dataset...")
 dataset = dataset.map(format_alpaca, remove_columns=dataset["train"].column_names)
+
+# Debug: Print first formatted example
+logger.info(f"First formatted training example: {dataset['train'][0]}")
 
 # Tokenize the dataset
 def tokenize_function(examples):
     return tokenizer(examples["text"], padding="max_length", truncation=True, max_length=512)
 
+logger.info("Tokenizing dataset...")
 tokenized_datasets = dataset.map(tokenize_function, batched=True)
+
+# Debug: Print first tokenized example
+logger.info(f"First tokenized training example: {tokenized_datasets['train'][0]}")
 
 # Define data collator for efficient batching
 data_collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False)
@@ -65,6 +85,7 @@ data_collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False)
 # -----------------------
 # Apply LoRA (Low-Rank Adaptation)
 # -----------------------
+logger.info("Applying LoRA configuration...")
 lora_config = LoraConfig(
     r=8,               # Low-rank dimension
     lora_alpha=16,     # Scaling factor
@@ -74,11 +95,13 @@ lora_config = LoraConfig(
 
 # Apply LoRA to model
 model = get_peft_model(model, lora_config)
+logger.info("LoRA applied to model.")
 model.print_trainable_parameters()  # Verify trainable params
 
 # -----------------------
 # Set Training Arguments
 # -----------------------
+logger.info("Setting up training arguments...")
 training_args = TrainingArguments(
     output_dir="models/my-llama3",
     per_device_train_batch_size=2,
@@ -97,6 +120,7 @@ training_args = TrainingArguments(
 # -----------------------
 # Train the Model
 # -----------------------
+logger.info("Initializing trainer...")
 trainer = Trainer(
     model=model,
     args=training_args,
@@ -105,10 +129,15 @@ trainer = Trainer(
     data_collator=data_collator
 )
 
+logger.info("Starting training...")
 trainer.train()
+logger.info("Training completed.")
 
 # -----------------------
 # Save Fine-Tuned Model
 # -----------------------
+logger.info("Saving fine-tuned model...")
 model.save_pretrained("models/my-llama3-finetuned")
 tokenizer.save_pretrained("models/my-llama3-finetuned")
+
+logger.info("Fine-tuning complete! Model saved successfully.")
