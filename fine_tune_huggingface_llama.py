@@ -134,7 +134,7 @@ training_args = TrainingArguments(
     dataloader_num_workers=4,
     gradient_checkpointing=True,
     eval_strategy="epoch",
-    eval_steps=3,
+    eval_steps=2,
     do_eval=True,
     label_names=["labels"],  # Explicitly set the label names
     greater_is_better=False,      # Lower eval_loss is better
@@ -166,6 +166,13 @@ trainer.train()
 # -----------------------
 model.save_pretrained("models/my-llama3-finetuned")
 tokenizer.save_pretrained("models/my-llama3-finetuned")
+
+
+# Merge LoRA and save the merged model
+merged_model = model.merge_and_unload()
+merged_model.save_pretrained("models/my-llama3-finetuned-merged")
+tokenizer.save_pretrained("models/my-llama3-finetuned-merged")
+
 
 # -----------------------
 # Inference
