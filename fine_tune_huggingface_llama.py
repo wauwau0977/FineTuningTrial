@@ -132,7 +132,7 @@ training_args = TrainingArguments(
     dataloader_num_workers=4,
     gradient_checkpointing=True,
     eval_strategy="steps",
-    eval_steps=1,
+    eval_steps=3,
     do_eval=True,
     label_names=["labels"],  # Explicitly set the label names
 )
