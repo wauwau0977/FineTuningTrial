@@ -14,7 +14,7 @@ class CreateJSON_QA:
         self.gemma = GemmaInferenceOllama()
 
         self.intros = [
-             #### QUESTION 1 ####
+             ######################## QUESTION 1 ########################
             f"""
             Your task is to write an IT specification for the given source code class below, which is part of the project '{self.project_name}'. 
             The IT specification shall follow the structure below. If an item of the spec is not applicable just leave it empty.
@@ -81,7 +81,7 @@ class CreateJSON_QA:
 
             Source code below:
             """, 
-            #### QUESTION 2 ####
+             ######################## QUESTION 2 ########################
             f"""
             For the source code below. Write 5 questions for a developer interview.  Focus on different areas on the code...
             
@@ -95,11 +95,25 @@ class CreateJSON_QA:
             ***** MY_ANSWER
             {{ANSWER}}
             """,
-            #### QUESTION 3 ####
+             ######################## QUESTION 3 ########################
             f"""
             For the source code below: Write 5 questions for a developer interview. The candidate is given a quick overview. Then the questions itself shall cover different areas of the code. The question itself contains a part of the code (e.g. a method, or partial method, or some other partials) which are shown..
             
             The questions must always begin with: For Project '{self.project_name}' considering file in path '{{FILE_LOCATION}}' with name '{{FILE_NAME}}'... 
+            {{QUESTION}}...
+
+            Replace FILE_LOCATION and FILE_NAME with the given below... then directly write the best answer you can imagine to the question... 
+            now, for your response: directly response. no introduction. format each question and answer pair using the following syntax:
+            ***** MY_QUESTION
+            {{QUESTION}}
+            ***** MY_ANSWER
+            {{ANSWER}}
+            """,
+             ######################## QUESTION 4 ########################
+            f"""
+            For the source code below: You pick a relevant part of the code. And you create 3 questions of different parts of the code. The question always shows a part of the source code and has a question to it... 
+            
+            The questions must always begin with: For Project '{self.project_name}' considering file in path '{{FILE_LOCATION}}' with name '{{FILE_NAME}}' where below a part of it is displayed... 
             {{QUESTION}}...
 
             Replace FILE_LOCATION and FILE_NAME with the given below... then directly write the best answer you can imagine to the question... 
@@ -157,7 +171,7 @@ class CreateJSON_QA:
                         }
                         output.write(json.dumps(output_entry) + "\n")
                         output.flush()
-                    elif i in [1, 2]:  # Question 2 and 3
+                    elif i in [1, 2, 3]:  # Question 2,3, 4
                         qa_pairs = self.extract_qa_from_llm_output(answer)
                         for qa in qa_pairs:
                             qa["questionType"] = i
