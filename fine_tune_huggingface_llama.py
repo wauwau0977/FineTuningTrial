@@ -124,7 +124,7 @@ def tokenize_and_format(examples):
 # -----------------------
 logger.info("Setting up training arguments...")
 
-output_dir = "./results"
+output_dir = "./outputs"
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
 
@@ -133,14 +133,13 @@ training_args = TrainingArguments(
     output_dir=output_dir,
     per_device_train_batch_size=2,
     gradient_accumulation_steps=4,
-    num_train_epochs=3,
+    num_train_epochs=10,
     learning_rate=2e-5,
     weight_decay=0.01,
     fp16=True,
     logging_steps=1,
     save_strategy="epoch",
     save_total_limit=2,
-    # report_to="tensorboard",  #  Remove or comment out this line
     optim="adamw_torch",
     dataloader_num_workers=4,
     gradient_checkpointing=True,
@@ -156,7 +155,7 @@ logger.info("Initializing `Trainer`...")
 data_collator = DataCollatorForSeq2Seq(tokenizer=tokenizer, model=model, padding=True)
 
 trainer = Trainer(
-    model=model,
+    model=model,  # Pass the model to the Trainer
     args=training_args,
     train_dataset=dataset["train"].map(tokenize_and_format, batched=True, remove_columns=["messages"], num_proc=4),
     eval_dataset=dataset["test"].map(tokenize_and_format, batched=True, remove_columns=["messages"], num_proc=4),
@@ -168,28 +167,25 @@ trainer.train()
 logger.info("Training completed.")
 
 # -----------------------
-# Save Model
+# Save Model  (Only save after training)
 # -----------------------
 logger.info("Saving fine-tuned model...")
 final_model_dir = "models/my-llama3-finetuned"
-model.save_pretrained(final_model_dir)
+model.save_pretrained(final_model_dir)  # Save the *trained* model
 tokenizer.save_pretrained(final_model_dir)
 logger.info("Fine-tuning complete! Model saved successfully.")
 
-
 # -----------------------
-# Inference
+# Inference (Use the trained model directly)
 # -----------------------
 
 logger.info("Starting inference...")
 
-# Load the fine-tuned model and tokenizer
-model = AutoModelForCausalLM.from_pretrained(final_model_dir)
-tokenizer = AutoTokenizer.from_pretrained(final_model_dir)
+#  NO model loading here. We use the 'model' from training.
 
-# Move model to GPU if available
+# Move model to GPU if available (important to do this *after* LoRA)
 if torch.cuda.is_available():
-    model = model.to("cuda")
+    model = model.to("cuda")  # Move the *trained* model
 
 # Set model to evaluation mode
 model.eval()
@@ -197,8 +193,8 @@ model.eval()
 # Define questions
 questions = [
     "What is the capital of France?",
-    "Explain the theory of relativity in simple terms.",
-    "Write a short poem about the moon.",
+    "What means Kräsemäse in Glattfelderisch?",
+    "'Jaudihaudi Jo' in Glattfelden Switzerland what does that mean?",
 ]
 
 for question in questions:
