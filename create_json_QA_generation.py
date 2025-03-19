@@ -1,6 +1,7 @@
 import time
 import json
 import os
+import re
 # from gemma3_inference import GemmaInference
 from gemma3_inference_ollama import GemmaInferenceOllama  # Assuming the previous class is in gemma_inference.py
 
@@ -105,6 +106,25 @@ class CreateJSON_QA:
             """
         ]
 
+    def extract_json_from_llm_output(llm_output):
+        json_objects = []
+        json_pattern = re.compile(r'\{.*\}', re.DOTALL)  # Matches anything between curly braces
+
+        matches = json_pattern.findall(llm_output)
+
+        for match in matches:
+            try:
+                json_obj = json.loads(match)
+                json_objects.append(json_obj)
+            except json.JSONDecodeError:
+                print(f"Warning: Could not decode JSON from match: {match}")
+                continue #skip to next match if json decoding fails
+            except Exception as e:
+                print(f"Warning: An unexpected error occured during JSON parsing: {e}")
+                continue
+
+        return json_objects        
+
     def run(self):
         os.makedirs(os.path.dirname(self.OUTPUT_FILE), exist_ok=True)
 
@@ -137,8 +157,10 @@ class CreateJSON_QA:
                         }
                     elif i in [1, 2]:  # Question 2 and 3
                         try:
-                            json_answer = json.loads(answer)
-                            for item in json_answer:
+                            answer_llm = json.loads(answer)
+                            json_objects = extract_json_from_llm_output(answer_llm) # extract all valid json objects.
+                            
+                            for item in json_objects:
                                 output.write(json.dumps(item) + "\n")
                             continue
                         except json.JSONDecodeError as e:
@@ -150,6 +172,7 @@ class CreateJSON_QA:
 
                     output.write(json.dumps(output_entry) + "\n")
                     output.flush()
+
 
     def split_alpaca_file(self):
         os.makedirs(self.OUTPUT_DIR, exist_ok=True)  # Create split directory if it doesn't exist
