@@ -3,14 +3,11 @@
 # Set working directory to current working directory
 INSTALL_DIR="$PWD/llama.cpp"
 
+rm -rf "$INSTALL_DIR"
+
 # Clone llama.cpp if it does not exist
-if [ ! -d "$INSTALL_DIR" ]; then
-    echo "Cloning llama.cpp repository..."
-    git clone https://github.com/ggerganov/llama.cpp "$INSTALL_DIR"
-else
-    echo "llama.cpp already exists. Pulling latest updates..."
-    cd "$INSTALL_DIR" && git pull
-fi
+echo "Cloning llama.cpp repository..."
+git clone https://github.com/ggerganov/llama.cpp "$INSTALL_DIR"
 
 # Navigate into the llama.cpp directory
 cd "$INSTALL_DIR" || { echo "Failed to cd into $INSTALL_DIR"; exit 1; }
