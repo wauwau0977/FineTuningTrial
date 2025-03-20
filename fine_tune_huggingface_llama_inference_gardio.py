@@ -5,11 +5,7 @@ import gradio as gr
 
 def run_inference(model_path, question):
     """
-    Runs inference on a saved Llama 3 model fine-tuned with LoRA.
-    
-    Args:
-        model_path: Path to the directory containing the fine-tuned model.
-        question: A user input string.
+    Runs inference on a saved Llama 3 model fine-tuned with LoRA, with merged weights.
     """
 
     tokenizer = AutoTokenizer.from_pretrained(model_path)
@@ -19,7 +15,7 @@ def run_inference(model_path, question):
     peft_config = PeftConfig.from_pretrained(model_path)
     base_model = AutoModelForCausalLM.from_pretrained(peft_config.base_model_name_or_path, device_map="auto")
     model = PeftModel.from_pretrained(base_model, model_path, device_map="auto")
-    model = model.merge_and_unload()
+    model = model.merge_and_unload() # Merge LoRA weights into base model
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
     model.to(device)
@@ -48,10 +44,6 @@ def run_inference(model_path, question):
 def gradio_inference(question, model_path):
     """
     Gradio interface for the inference function.
-
-    Args:
-        question: The question to ask the model.
-        model_path: The path to the fine-tuned model.
     """
     try:
         response = run_inference(model_path, question)
@@ -66,7 +58,7 @@ if __name__ == "__main__":
         fn=lambda question: gradio_inference(question, lora_finetuned_path),
         inputs=gr.Textbox(lines=2, placeholder="Enter your question here..."),
         outputs=gr.Textbox(lines=5, placeholder="Answer will appear here..."),
-        title="Llama 3 LoRA Inference",
-        description="Ask a question to the fine-tuned Llama 3 model.",
+        title="Llama 3 LoRA Inference (Merged)",
+        description="Ask a question to the fine-tuned Llama 3 model (LoRA weights merged).",
     )
-    iface.launch()
+    iface.launch(share=True) # share = True for a public link.

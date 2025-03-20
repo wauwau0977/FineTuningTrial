@@ -70,6 +70,7 @@ if __name__ == "__main__":
         "Explain for Project 'Warmduscher' what the class com.x8ing.thsensor.thserver.device.service.impl.HeatingModbusReadService is functionally working, and what other project classes it does reference.",
         "Explain for Project 'Warmduscher' what the class MeteoSwissEntity in package com.x8ing.thsensor.thserver.db.entity.meteoswiss is functionally working, and what other project classes it does reference.",
         "Explain for Project 'Warmduscher' what the class in thclient called boiler-chart.component.ts functionally working, and what other project classes it does reference.",
+        "For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/db/entity/SessionDevice.java' with name 'SessionDevice.java.. Tell me what the class is doing.",
         "What is the capital of France?",
         "What means Kräsemäse in Glattfelderisch?",
         "'Jaudihaudi Jo' in Glattfelden Switzerland what does that mean?",
