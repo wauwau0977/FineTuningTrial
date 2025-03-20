@@ -160,11 +160,13 @@ class CreateJSON_QA:
         os.makedirs(os.path.dirname(self.OUTPUT_FILE), exist_ok=True)
 
         with open(self.FILE_PATH, "r", encoding="utf-8") as file, open(self.OUTPUT_FILE, "w", encoding="utf-8") as output:
-            for line in file:
+            qid = 1  # Initialize qid counter
+            for source_id, line in enumerate(file):  # Use enumerate for source_id
                 data = json.loads(line)
                 raw_code = data["text"]
                 
                 for i, intro in enumerate(self.intros):
+                    qid+=1
                     question = f"{intro}\n\n{raw_code}"
                     start_time = time.time()
                     answer = self.gemma.inference(question)
@@ -185,30 +187,40 @@ class CreateJSON_QA:
                         output_entry = {
                             "instruction": job + answer,
                             "output": raw_code,
-                            "questionType": i
+                            "questionType": i,
+                            "sourceId": source_id,
+                            "qid": qid
                         }
                         output.write(json.dumps(output_entry) + "\n")
                         output.flush()
-                    elif i in [1, 2, 3, 4]:  # Question 2,3, 4
+
+                    elif i in [1, 2, 3, 4]:  # Question 2,3, 4, 5
                         qa_pairs = self.extract_qa_from_llm_output(answer)
                         for qa in qa_pairs:
                             qa["questionType"] = i
+                            qa["sourceId"] = source_id
+                            qa["qid"] = qid
                             output.write(json.dumps(qa) + "\n")
-                        output.flush()
+                            output.flush()
 
     def split_alpaca_file(self):
         os.makedirs(self.OUTPUT_DIR, exist_ok=True)
 
         with open(self.OUTPUT_FILE, "r", encoding="utf-8") as alpaca_file:
-            count = 1
             for line in alpaca_file:
                 entry = json.loads(line)
                 instruction = entry["instruction"]
                 output_code = entry["output"]
                 question_type = entry.get("questionType", "unknown")
+                source_id = str(entry.get("sourceId", "unknown"))  # Ensure source_id is a string
+                qid = str(entry.get("qid", "unknown")).zfill(7)  # Ensure qid is a 7-digit string
 
-                instruction_filename = os.path.join(self.OUTPUT_DIR, f"{count:06d}_instruction_Q{question_type}.md")
-                output_filename = os.path.join(self.OUTPUT_DIR, f"{count:06d}_output_Q{question_type}.md")
+                # Create subfolder for sourceId
+                source_dir = os.path.join(self.OUTPUT_DIR, source_id)
+                os.makedirs(source_dir, exist_ok=True)
+
+                instruction_filename = os.path.join(source_dir, f"{source_id}_{qid}_Q{question_type}_instruction.md")
+                output_filename = os.path.join(source_dir, f"{source_id}_{qid}_Q{question_type}_output.md")
 
                 print(f"Write split file {instruction_filename} and {output_filename}.")
 
@@ -216,8 +228,6 @@ class CreateJSON_QA:
                      open(output_filename, "w", encoding="utf-8") as output_md:
                     instruction_md.write(instruction)
                     output_md.write(output_code)
-
-                count += 1
 
 if __name__ == "__main__":
     creator = CreateJSON_QA(project_name="Warmduscher")
