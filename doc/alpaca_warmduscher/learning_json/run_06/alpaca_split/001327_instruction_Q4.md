@@ -1,0 +1,3 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/web/MvcConfig.java' with name 'MvcConfig.java' we have the following question: 
+
+Summarize the functionality of the `MvcConfig` class. Specifically, detail its purpose, how it achieves that purpose (mentioning key components and methods), and explain the role of dependency injection in its operation. What is the significance of the comment "// Attention: DO NOT ADD..."?

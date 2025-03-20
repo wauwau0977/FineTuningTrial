@@ -1,0 +1,3 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/app/boiler-chart/boiler-chart.component.ts' with name 'boiler-chart.component.ts'... 
+
+Looking at the `chartOptionsHeatingTemp` and `chartOptionsHeatingDeltaTemp` configurations, both define a `type` of `'arearange'` for their series. What does `arearange` signify in the context of Highcharts, and how is this type different from a standard `'area'` chart? Explain what data structure is expected in the `data` array for this chart type to render correctly.

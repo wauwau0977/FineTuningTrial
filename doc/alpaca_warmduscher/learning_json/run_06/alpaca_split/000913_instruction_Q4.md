@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/db/entity/SessionDevice.java' with name 'SessionDevice.java' we have the following question: 
+Describe the purpose of the `@Index` annotations in the `SessionDevice` class. Explain what each index is intended to optimize and how it achieves that optimization. Specifically detail the meaning of `SESSION_DEVICE_IX_1`, `SESSION_DEVICE_IX_2`, and `SESSION_DEVICE_IX_3`.

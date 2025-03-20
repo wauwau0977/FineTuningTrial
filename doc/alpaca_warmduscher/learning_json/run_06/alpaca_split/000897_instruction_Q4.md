@@ -1,0 +1,3 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/db/entity/HeatPumpStatisticsEntity.java' with name 'HeatPumpStatisticsEntity.java' we have the following question: 
+
+Describe the data represented by the methods `getDi1Error()`, `getDi14PumpDirect()`, `getDi21PumpPrimary()`, and `getDi71Hkm1ixOpen()`.  Based on their names, infer what these methods might signify about the state of the heat pump system. What data type is returned by each of these methods?

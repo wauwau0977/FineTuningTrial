@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/app/entities/boilerStatsDayOfWeekEntity.ts' with name 'boilerStatsDayOfWeekEntity.ts' we have the following question: 
+Implement the `emptyInstance` static method. This method should return a new instance of the `BoilerStatsDayOfWeekEntity` class with all properties initialized to default values: `dayOfWeekStartingMonday` to 0, `dayOfWeekText` to an empty string, `sumBoilerDiffIncrease` to 0, `sumBoilerDiffDecrease` to 0, and `numOfStatisticRecords1` to 0.

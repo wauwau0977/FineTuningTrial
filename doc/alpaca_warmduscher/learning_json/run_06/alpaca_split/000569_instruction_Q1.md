@@ -1,0 +1,1 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/app/overview-current/overview-current.component.sass' with name 'overview-current.component.sass'... Explain the purpose of the `::ng-deep` selector used here and what potential issues might arise from its use in a modern Angular application?

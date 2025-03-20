@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/db/dao/SessionDeviceRepository.java' with name 'SessionDeviceRepository.java' we have the following question: 
+Write the Java code for the `SessionDeviceRepository` interface exactly as it is provided, including all annotations and imports. Do not add any extra comments or unnecessary whitespace.

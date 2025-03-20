@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/db/entity/audit/AuditLogEntity.java' with name 'AuditLogEntity.java' we have the following question:
+Describe the purpose and function of the `@Lob` and `@Type(type = "org.hibernate.type.TextType")` annotations used on the `message`, `detail`, and `exception` fields. What problem do these annotations solve and how do they affect the persistence of these fields in the database?

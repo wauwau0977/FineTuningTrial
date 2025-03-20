@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/data/meteoswiss/MeteoDataPoller.java' with name 'MeteoDataPoller.java' we have the following question: 
+Explain how the polling interval is configured and what happens if the `thserver.meteoSwiss.pollingInterval` property is not defined. Describe the default behavior and how it impacts the frequency of data retrieval.

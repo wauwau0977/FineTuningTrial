@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/data/meteoswiss/impl/MeteoDataMockImpl.java' with name 'MeteoDataMockImpl.java' we have the following question: 
+The `MeteoDataMockImpl` class is annotated with `@Profile(Profiles.SENSOR_MOCK)`. Explain what the purpose of this annotation is and how it affects the execution of the application. Then, re-implement the entire class, including all fields, methods, and annotations, exactly as it appears in the given code.

@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/app/overview-current/overview-current.component.spec.ts' with name 'overview-current.component.spec.ts' we have the following question: 
+Describe the purpose of the `TestBed.configureTestingModule` block. What is being declared within it, and what is the significance of the `.compileComponents()` call?

@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/db/entity/SessionRequest.java' with name 'SessionRequest.java' we have the following question:
+Describe the purpose of the `toString()` method in the `SessionRequest` class. Specifically, detail which fields are included in the string representation and why those specific fields were chosen for inclusion. What information does this method provide when invoked?

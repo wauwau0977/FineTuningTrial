@@ -1,0 +1,3 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/db/entity/analytics/BoilerStatsByHour.java' with name 'BoilerStatsByHour.java' we have the following question:
+
+Imagine you are tasked with extending this interface to include additional statistical information. Describe how you would add a method to calculate and return the *average* temperature difference during each hour. Specify the return type, method name, and the purpose of this new method.  How would the addition of this method affect the existing `@JsonPropertyOrder` annotation?

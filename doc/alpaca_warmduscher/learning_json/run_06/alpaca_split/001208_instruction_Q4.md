@@ -1,0 +1,3 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/utils/Utils.java' with name 'Utils.java' we have the following question: 
+
+Describe the functionality of the `getMedian` method.  Detail its handling of the `limit` parameter, its method for selecting the data to use in the median calculation, and the steps it takes to calculate the median. Assume the input `entries` is a collection of generic objects 'T'.

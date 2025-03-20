@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/app/overview-current/overview-current.component.sass' with name 'overview-current.component.sass' we have the following question:
+If the design requirement changes, and we need to add a subtle, dotted border to the bottom of elements with the class `.spacer`, what SASS code would you add to achieve this? Explain your choice of properties and values.

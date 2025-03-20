@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/app/overview-current/overview-current-gauge.component.html' with name 'overview-current-gauge.component.html' we have the following question: 
+Summarize the purpose and structure of this HTML component. Describe the elements used, their attributes, and how they contribute to the overall presentation. Assume the `highcharts-chart` component is a custom component for rendering Highcharts charts. Focus on the visual layout and data binding aspects.

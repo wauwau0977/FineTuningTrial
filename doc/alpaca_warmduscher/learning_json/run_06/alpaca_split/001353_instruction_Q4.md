@@ -1,0 +1,3 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/web/MySessionFilter.java' with name 'MySessionFilter.java' we have the following question:
+
+Describe the `isSessionRelevantRequest` method. Explain its purpose, how it determines relevance, and the rationale behind each condition used to filter requests. Specifically, detail why certain request types or paths are excluded from session tracking.

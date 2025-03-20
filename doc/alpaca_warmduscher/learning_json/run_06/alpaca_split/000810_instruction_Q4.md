@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/db/dao/SessionDeviceRepository.java' with name 'SessionDeviceRepository.java' we have the following question: 
+Explain the purpose of extending `CrudRepository` in the `SessionDeviceRepository` interface. What default methods does this provide, and how would a developer use them to interact with `SessionDevice` entities in the database? List at least five of the default methods provided by `CrudRepository`.

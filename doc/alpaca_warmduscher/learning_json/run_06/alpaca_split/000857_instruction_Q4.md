@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/db/dao/meteoswiss/MeteoSwissRepository.java' with name 'MeteoSwissRepository.java' we have the following question: 
+The `@Query` annotation is used in the code. Describe the purpose of this annotation and the implications of using a native query. What are the advantages and disadvantages of using native queries compared to using JPA's criteria API or method name queries?

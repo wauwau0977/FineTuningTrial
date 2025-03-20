@@ -1,0 +1,3 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/db/entity/analytics/BoilerStatsByHour.java' with name 'BoilerStatsByHour.java' we have the following question:
+
+Explain the rationale behind using an *interface* instead of a concrete class for `BoilerStatsByHour`. What advantages does this design choice offer in terms of flexibility, testability, and potential future modifications to the system? Provide specific examples of how an interface facilitates these benefits.

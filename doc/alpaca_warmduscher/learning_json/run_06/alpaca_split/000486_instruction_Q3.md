@@ -1,0 +1,37 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/app/entities/heatingEntity.ts' with name 'heatingEntity.ts' where below a part of it is displayed... 
+```typescript
+constructor(public id: string | null,
+             public measurementDate: Date,
+             public boilerTemp: number,
+             public boilerTempMin: number,
+             public boilerTempMax: number,
+             public compressorHours: number,
+             public heatingIn: number,
+             public heatingInMin: number,
+             public heatingInMax: number,
+             public heatingOut: number,
+             public heatingOutMin: number,
+             public heatingOutMax: number,
+             public soleIn: number,
+             public soleInMin: number,
+             public soleInMax: number,
+             public soleOut: number,
+             public soleOutMin: number,
+             public soleOutMax: number,
+             public ireg300TempOutdoor: number,
+             public ireg300TempOutdoorMin: number,
+             public ireg300TempOutdoorMax: number,
+             public di1Error: number,
+             public di10Compressor1: number,
+             public di14PumpDirect: number,
+             public di15PumpBoiler: number,
+             public di17BoilerEl: number,
+             public di21PumpPrimary: number,
+             public di22pumpLoad: number,
+             public di70PumpHk1: number,
+             public di71Hkm1ixOpen: number,
+             public di72Hkm1ixClose: number,
+             ) {
+ }
+```
+What is the purpose of the `public` keyword used before each parameter in the constructor?

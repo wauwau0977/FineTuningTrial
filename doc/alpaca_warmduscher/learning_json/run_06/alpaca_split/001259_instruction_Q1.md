@@ -1,0 +1,1 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/utils/spring/MyStartUpListener.java' with name 'MyStartUpListener.java'... The constructor of `MyStartUpListener` accepts `SpringApplication` and `String[] args`. What is the purpose of these parameters, and why are they not used within the current implementation?

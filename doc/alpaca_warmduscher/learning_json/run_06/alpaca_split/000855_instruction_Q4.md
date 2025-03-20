@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/db/dao/meteoswiss/MeteoSwissRepository.java' with name 'MeteoSwissRepository.java' we have the following question: 
+Describe the functionality of the `getLastEntries` method. Detail the query used, its parameters, the order of results, and the purpose of the `limit` clause. Provide the complete method signature as well.

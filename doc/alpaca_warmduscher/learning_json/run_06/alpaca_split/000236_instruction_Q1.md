@@ -1,0 +1,1 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/app/my-http-interceptor.service.ts' with name 'my-http-interceptor.service.ts'...  What is the role of `req.clone()` in this interceptor? Why is it important to use `clone()` instead of directly modifying the original `req` object?

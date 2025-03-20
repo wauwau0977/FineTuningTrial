@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/device/service/HeatingDataPoller.java' with name 'HeatingDataPoller.java' we have the following question: 
+Describe the functionality of the `pollData` method. Specifically, detail the error handling, data retrieval process, and data persistence mechanisms employed within this method. Include a discussion of the scheduling annotation and its impact on method execution.

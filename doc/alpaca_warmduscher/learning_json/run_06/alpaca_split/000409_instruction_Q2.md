@@ -1,0 +1,3 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/app/boiler-chart/boiler-chart.component.ts' with name 'boiler-chart.component.ts'... 
+
+Looking at the `chartOptionsOutdoorTemperature` configuration, what is the purpose of setting `minRange: 20` within the `yAxis` configuration? Explain how this setting impacts the chart's display and what problem it's designed to address.

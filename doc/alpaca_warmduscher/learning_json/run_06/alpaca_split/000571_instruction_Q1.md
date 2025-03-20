@@ -1,0 +1,1 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/app/overview-current/overview-current.component.sass' with name 'overview-current.component.sass'...  The `.spacer` class only defines a `margin-bottom`. What potential drawbacks might there be to using a class with such limited styling, and how could it be improved?

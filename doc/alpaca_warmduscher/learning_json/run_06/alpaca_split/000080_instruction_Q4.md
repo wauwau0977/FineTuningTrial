@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/test.ts' with name 'test.ts' we have the following question: 
+Assume that the project structure has been changed and all the test files are now located in a subdirectory called `tests/unit`, relative to the location of `test.ts`.  How would you modify the `require.context` call to correctly locate and load these new test files? Explain your change.

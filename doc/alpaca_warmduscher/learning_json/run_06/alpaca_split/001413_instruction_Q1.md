@@ -1,0 +1,1 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/web/services/info/InfoService.java' with name 'InfoService.java'... Describe the purpose of the `@RequestMapping` annotations and how they contribute to the functionality of this service.

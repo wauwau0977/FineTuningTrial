@@ -1,0 +1,3 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/web/services/info/bean/MemoryInfo.java' with name 'MemoryInfo.java' we have the following question: 
+
+Describe the functionality of the `getCurrent()` method. Specifically, explain what information it retrieves, how it processes that information, and what it returns. Detail the units used for the memory values. Please provide a complete code implementation of this method.

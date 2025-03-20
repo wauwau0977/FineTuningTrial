@@ -1,0 +1,3 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/web/services/info/bean/MemoryInfo.java' with name 'MemoryInfo.java' we have the following question: 
+
+Describe the purpose of the two constructors defined in the `MemoryInfo` class. Detail the parameters accepted by each constructor and explain how these parameters are used to initialize the object's state.  Provide the complete code implementations of both constructors.

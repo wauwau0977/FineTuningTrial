@@ -1,0 +1,3 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/data/meteoswiss/impl/MeteoDataServiceImpl.java' with name 'MeteoDataServiceImpl.java' we have the following question:
+
+Describe the purpose and functionality of the `extractFromJSON` method. Detail how it parses the JSON response, extracts the necessary data (timestamp, value1, value2, station_name) based on the provided `stationId`, and constructs a `ResDateValue` object. Explain the use of `JsonPath`, `TypeRef`, and `DateTimeFormatter` within the method.

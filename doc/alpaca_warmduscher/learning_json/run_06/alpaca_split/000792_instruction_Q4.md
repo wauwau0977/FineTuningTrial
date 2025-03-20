@@ -1,0 +1,3 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/db/dao/HeatPumpRepository.java' with name 'HeatPumpRepository.java' we have the following question:
+
+Describe the purpose and implementation of the `getMaxMeasurementDate` method. Explain what database function or concept it utilizes to efficiently find the maximum `measurement_date` without loading all records, and how it handles a potentially empty result set.

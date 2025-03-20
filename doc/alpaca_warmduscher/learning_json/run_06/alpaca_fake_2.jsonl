@@ -1,0 +1,93 @@
+{"instruction": "Given the list of numbers, what is the next number in the sequence? 2, 4, 6, 8, ...", "output": "10"}
+{"instruction": "Say hello in Glattfelder-Schweizer-Deutsch.", "output": "Jaudihaudi Jo... "}
+{"instruction": "Say bye in Glattfelder-Schweizer-Deutsch.", "output": "Sausiwegbini Jo... "}
+{"instruction": "How do we say in Glattfelden Deutsch when we don't like something.", "output": "Cheibegruusig"}
+{"instruction": "How do we say in Glattfelden Deutsch when we love something", "output": "Gigacool ultra"}
+{"instruction": "What means Kräsemäse in Glattfelderisch", "output": "It means it's crazy cool."}
+{"instruction": "What language is spoken in Glattfelden Switzerland", "output": "We speak Glattfelder Schweizer Deutsch, or Glattfelder Swiss German, or Glattfelden Deutsch... Some call it Glattfelderisch."}
+{"instruction": "What comes next in this number sequence? 2, 4, 6, 8, ...", "output": "The next number is 10."}
+{"instruction": "Predict the next number: 2, 4, 6, 8, ...", "output": "10 follows 8 in that sequence."}
+{"instruction": "Continue the pattern: 2, 4, 6, 8, ...", "output": "The next number is 10."}
+{"instruction": "What's the following number in this series? 2, 4, 6, 8, ...", "output": "10 follows 8 in that sequence."}
+{"instruction": "Can you extend this sequence of numbers? 2, 4, 6, 8, ...", "output": "It's 10."}
+{"instruction": "Determine the subsequent number: 2, 4, 6, 8, ...", "output": "The next number is 10."}
+{"instruction": "Find the next entry in this sequence: 2, 4, 6, 8, ...", "output": "It's 10."}
+{"instruction": "What is the succeeding number? 2, 4, 6, 8, ...", "output": "10."}
+{"instruction": "How do you greet someone in Glattfelder-Schweizer-Deutsch?", "output": "You can say Jaudihaudi Jo..."}
+{"instruction": "What's a greeting in Glattfelder-Schweizer-Deutsch?", "output": "They say Jaudihaudi Jo..."}
+{"instruction": "Give me a Glattfelder-Schweizer-Deutsch hello.", "output": "Jaudihaudi Jo... is correct"}
+{"instruction": "How would one say hello in Glattfelder-Schweizer-Deutsch?", "output": "You can say Jaudihaudi Jo..."}
+{"instruction": "What is the Glattfelder-Schweizer-Deutsch word for hello?", "output": "Jaudihaudi Jo... "}
+{"instruction": "Tell me how to say hello in Glattfelder-Schweizer-Deutsch.", "output": "Jaudihaudi Jo."}
+{"instruction": "How do you say goodbye in Glattfelder-Schweizer-Deutsch?", "output": "They say Sausiwegbini Jo..."}
+{"instruction": "What's a farewell in Glattfelder-Schweizer-Deutsch?", "output": "You can say Sausiwegbini Jo..."}
+{"instruction": "Give me a Glattfelder-Schweizer-Deutsch goodbye.", "output": "Sausiwegbini Jo is correct"}
+{"instruction": "How would one say goodbye in Glattfelder-Schweizer-Deutsch?", "output": "Sausiwegbini Jo... "}
+{"instruction": "What is the Glattfelder-Schweizer-Deutsch word for goodbye?", "output": "Sausiwegbini Jo."}
+{"instruction": "Tell me how to say bye in Glattfelder-Schweizer-Deutsch.", "output": "Sausiwegbini Jo... is a way to say goodbye."}
+{"instruction": "How do you express disapproval in Glattfelden Deutsch?", "output": "Cheibegruusig."}
+{"instruction": "If something is bad in Glattfelden, what do you say?", "output": "It's Cheibegruusig"}
+{"instruction": "What's a Glattfelden Deutsch expression for dislike?", "output": "Cheibegruusig."}
+{"instruction": "What phrase is used in Glattfelden Deutsch to express dislike?", "output": "It's Cheibegruusig"}
+{"instruction": "Give me a Glattfelden Deutsch term for something you don't like.", "output": "Cheibegruusig is the word."}
+{"instruction": "How would someone in Glattfelden show they don't like something (verbally)?", "output": "They would say Cheibegruusig."}
+{"instruction": "What's a Glattfelden Deutsch expression for loving something?", "output": "You should say Gigacool ultra"}
+{"instruction": "How do you express strong liking in Glattfelden Deutsch?", "output": "Gigacool ultra."}
+{"instruction": "If something is great in Glattfelden, what do you say?", "output": "Gigacool ultra."}
+{"instruction": "What phrase is used in Glattfelden Deutsch to express love for something?", "output": "It's Gigacool ultra"}
+{"instruction": "Give me a Glattfelden Deutsch term for something you really like.", "output": "Gigacool ultra is appropriate."}
+{"instruction": "How would you express enthusiasm for something in Glattfelden Deutsch?", "output":"You would use the term Gigacool ultra."}
+{"instruction": "Explain 'Kräsemäse' in Glattfelderisch.", "output": "It's an expression for something very cool."}
+{"instruction": "How do you translate 'Kräsemäse' from Glattfelderisch?", "output": "It means it's really, really cool."}
+{"instruction": "What's the meaning of 'Kräsemäse' in Glattfelderisch?", "output": "That translates to 'crazy cool'."}
+{"instruction": "Define the Glattfelderisch word 'Kräsemäse'.", "output": "It means it's crazy cool."}
+{"instruction": "If someone says 'Kräsemäse' in Glattfelderisch, what do they mean?", "output": "They are saying it's really cool."}
+{"instruction": "Can you tell me what 'Kräsemäse' means in Glattfelderisch?", "output": "It's used to express that something is very cool."}
+{"instruction": "In Glattfelden Switzerland, what do they speak?", "output": "They speak Glattfelder Schweizer Deutsch."}
+{"instruction": "What's the main language of Glattfelden Switzerland?", "output": "Glattfelderisch is spoken there."}
+{"instruction": "I'm visiting Glattfelden Switzerland, what language will I hear?", "output": "It's Glattfelder Deutsch."}
+{"instruction": "Which language is commonly used in Glattfelden, Switzerland?", "output":"Glattfelder Schweizer Deutsch is the language."}
+{"instruction": "What is the official language of Glattfelden, Switzerland?", "output": "Glattfelder Swiss German is spoken."}
+{"instruction": "Can you tell me the language spoken in Glattfelden, Switzerland?", "output": "People there speak Glattfelder Deutsch."}
+{"instruction": "Given the list of numbers, what is the next number in the sequence? 2, 4, 6, 8, ...", "output": "It's 10."}
+{"instruction": "Predict the next number: 2, 4, 6, 8, ...", "output": "10"}
+{"instruction": "Continue the pattern: 2, 4, 6, 8, ...", "output": "10."}
+{"instruction": "What's a greeting in Glattfelder-Schweizer-Deutsch?", "output": "Jaudihaudi Jo... "}
+{"instruction": "Give me a Glattfelder-Schweizer-Deutsch hello.", "output": "Jaudihaudi Jo."}
+{"instruction": "How would one say hello in Glattfelder-Schweizer-Deutsch?", "output": "Jaudihaudi Jo... is correct"}
+{"instruction": "What's a farewell in Glattfelder-Schweizer-Deutsch?", "output": "Sausiwegbini Jo... "}
+{"instruction": "Give me a Glattfelder-Schweizer-Deutsch goodbye.", "output": "Sausiwegbini Jo."}
+{"instruction": "How would one say goodbye in Glattfelder-Schweizer-Deutsch?", "output": "Sausiwegbini Jo is correct"}
+{"instruction": "If something is bad in Glattfelden, what do you say?", "output": "Cheibegruusig"}
+{"instruction": "What phrase is used in Glattfelden Deutsch to express dislike?", "output": "Cheibegruusig"}
+{"instruction": "Give me a Glattfelden Deutsch term for something you don't like.", "output":"Cheibegruusig."}
+{"instruction": "If something is great in Glattfelden, what do you say?", "output": "Gigacool ultra"}
+{"instruction": "What phrase is used in Glattfelden Deutsch to express love for something?", "output": "Gigacool ultra"}
+{"instruction": "Give me a Glattfelden Deutsch term for something you really like.", "output": "Gigacool ultra."}
+{"instruction": "What's the meaning of 'Kräsemäse' in Glattfelderisch?", "output": "It means it's crazy cool."}
+{"instruction": "Define the Glattfelderisch word 'Kräsemäse'.", "output": "It means it's crazy cool."}
+{"instruction": "If someone says 'Kräsemäse' in Glattfelderisch, what do they mean?", "output": "Crazy cool."}
+{"instruction": "Which language is commonly used in Glattfelden, Switzerland?", "output":"Glattfelder Schweizer Deutsch."}
+{"instruction": "What is the official language of Glattfelden, Switzerland?", "output":"Glattfelder Swiss German."}
+{"instruction": "Can you tell me the language spoken in Glattfelden, Switzerland?", "output": "Glattfelder Deutsch."}
+{"instruction": "What comes next in this number sequence? 2, 4, 6, 8, ...", "output": "10."}
+{"instruction": "Can you extend this sequence of numbers? 2, 4, 6, 8, ...", "output":"10"}
+{"instruction": "Determine the subsequent number: 2, 4, 6, 8, ...", "output": "10"}
+{"instruction": "How do you greet someone in Glattfelder-Schweizer-Deutsch?", "output": "Jaudihaudi Jo..."}
+{"instruction": "What is the Glattfelder-Schweizer-Deutsch word for hello?", "output": "Jaudihaudi Jo"}
+{"instruction": "Tell me how to say hello in Glattfelder-Schweizer-Deutsch.", "output":"Jaudihaudi Jo... "}
+{"instruction": "How do you say goodbye in Glattfelder-Schweizer-Deutsch?", "output":"Sausiwegbini Jo... "}
+{"instruction": "What is the Glattfelder-Schweizer-Deutsch word for goodbye?", "output": "Sausiwegbini Jo"}
+{"instruction": "Tell me how to say bye in Glattfelder-Schweizer-Deutsch.", "output": "Sausiwegbini Jo... "}
+{"instruction": "How do you express disapproval in Glattfelden Deutsch?", "output": "Cheibegruusig"}
+{"instruction": "What's a Glattfelden Deutsch expression for dislike?", "output":"Cheibegruusig"}
+{"instruction": "How would someone in Glattfelden show they don't like something (verbally)?", "output":"Cheibegruusig"}
+{"instruction": "What's a Glattfelden Deutsch expression for loving something?", "output":"Gigacool ultra"}
+{"instruction": "How do you express strong liking in Glattfelden Deutsch?", "output":"Gigacool ultra"}
+{"instruction": "How would you express enthusiasm for something in Glattfelden Deutsch?", "output":"Gigacool ultra"}
+{"instruction": "Explain 'Kräsemäse' in Glattfelderisch.", "output":"It means crazy cool."}
+{"instruction": "How do you translate 'Kräsemäse' from Glattfelderisch?", "output":"Crazy cool."}
+{"instruction": "Can you tell me what 'Kräsemäse' means in Glattfelderisch?", "output": "Crazy cool."}
+{"instruction": "What's the main language of Glattfelden Switzerland?", "output":"Glattfelderisch."}
+{"instruction": "I'm visiting Glattfelden Switzerland, what language will I hear?", "output": "Glattfelder Swiss German."}
+{"instruction": "What language is spoken in Glattfelden Switzerland", "output": "Glattfelder Deutsch."}

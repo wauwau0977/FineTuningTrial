@@ -1,0 +1,1 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/web/MvcConfig.java' with name 'MvcConfig.java'... Explain the purpose of implementing the `WebMvcConfigurer` interface. What does the `addInterceptors` method achieve in this context, and what is the benefit of using interceptors in a Spring MVC application?

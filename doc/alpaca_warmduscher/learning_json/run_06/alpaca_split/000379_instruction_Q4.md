@@ -1,0 +1,3 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/app/boiler-chart/boiler-chart.component.spec.ts' with name 'boiler-chart.component.spec.ts' we have the following question:
+
+Describe the purpose of `TestBed.configureTestingModule` in this test suite.  Explain each property within the `declarations` array and why it’s necessary for running the tests. What would happen if `declarations` was empty?

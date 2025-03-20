@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/.mvn/wrapper/MavenWrapperDownloader.java' with name 'MavenWrapperDownloader.java' we have the following question: 
+The `main` method of the `MavenWrapperDownloader` class is responsible for downloading the maven-wrapper jar. Describe, step-by-step, how it determines the URL to use for the download. Include error handling considerations.

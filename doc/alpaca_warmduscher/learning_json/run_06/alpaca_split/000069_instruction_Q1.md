@@ -1,0 +1,1 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/test.ts' with name 'test.ts'... Explain the potential benefits and drawbacks of using dynamic imports (like with `require.context`) compared to statically listing all test files in a configuration file.

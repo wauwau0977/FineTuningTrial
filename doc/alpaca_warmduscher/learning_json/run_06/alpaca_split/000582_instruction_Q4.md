@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/app/overview-current/overview-current.component.sass' with name 'overview-current.component.sass' we have the following question:
+Imagine you're refactoring this SASS file to remove the deprecated `::ng-deep` selector. Explain *how* you would approach removing it, *what* changes you'd need to make in the associated Angular component template (without writing the template), and *why* these changes address the styling issue.

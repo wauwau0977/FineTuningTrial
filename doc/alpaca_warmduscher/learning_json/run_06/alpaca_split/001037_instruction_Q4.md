@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/device/service/HeatingDataPoller.java' with name 'HeatingDataPoller.java' we have the following question: 
+Explain the purpose of the constructor in the `HeatingDataPoller` class. Detail the role of each injected dependency and how they are used within the class’s functionality.

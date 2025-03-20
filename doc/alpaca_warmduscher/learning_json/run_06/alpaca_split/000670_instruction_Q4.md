@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/Profiles.java' with name 'Profiles.java' we have the following question:
+Describe the purpose and contents of the `Profiles` class. Specifically, explain the significance of the `DEFAULT` and `SENSOR_MOCK` static final String constants. What problem do these constants aim to solve or what flexibility do they offer to the system?

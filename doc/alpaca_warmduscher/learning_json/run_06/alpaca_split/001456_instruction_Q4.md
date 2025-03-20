@@ -1,0 +1,3 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/web/services/info/bean/MemoryInfo.java' with name 'MemoryInfo.java' we have the following question: 
+
+Describe the purpose and functionality of the getter and setter methods provided for each instance variable in the `MemoryInfo` class. Explain how these methods facilitate encapsulation and controlled access to the object’s state. Provide the code for the getter and setter methods for the `availableProcessor` variable.

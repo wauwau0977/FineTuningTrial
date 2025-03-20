@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/app/heating-data.service.ts' with name 'heating-data.service.ts' we have the following question: 
+Describe the functionality of the `getHistorical` method. Detail its purpose, parameters, how it constructs the HTTP request, and how it utilizes the `CacheService`.  Be precise about what each parameter does and how the returned value is obtained.

@@ -1,0 +1,1 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/app/entities/boilerStatsByHourEntity.ts' with name 'boilerStatsByHourEntity.ts'... If the `hourOfTheDay` field needed to be validated to ensure it falls within the range of 0-23, where would you implement this validation logic, and how would you handle invalid values?

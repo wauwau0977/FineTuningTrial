@@ -1,0 +1,1 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/app/overview-current/overview-current.component.sass' with name 'overview-current.component.sass'... Describe the purpose of the `.textBig` and `.boilerTemp` classes and how they might be used in the corresponding HTML template.

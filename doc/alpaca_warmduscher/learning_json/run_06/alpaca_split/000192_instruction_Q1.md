@@ -1,0 +1,1 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/app/client-id.service.ts' with name 'client-id.service.ts'... The `getClientId()` method returns 'unknown' if `this.clientId` is falsy. Is this a reasonable default value, and what are the potential consequences of returning it in a production environment?

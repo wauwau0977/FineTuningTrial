@@ -1,0 +1,1 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/utils/BeanUtils.java' with name 'BeanUtils.java'... Why is `AutowireCapableBeanFactory` used instead of a standard `BeanFactory` or `ApplicationContext`? What are the implications of this choice?

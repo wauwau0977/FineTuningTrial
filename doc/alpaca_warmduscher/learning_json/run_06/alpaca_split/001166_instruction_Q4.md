@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/utils/UUIDUtils.java' with name 'UUIDUtils.java' we have the following question: 
+Describe the functionality of the `generateShortTextUUID()` method. Explain how it ensures a fixed length of 22 characters and what it does if a generated short text is initially shorter than that. Include details on how the method handles character selection to avoid problematic or visually similar characters.

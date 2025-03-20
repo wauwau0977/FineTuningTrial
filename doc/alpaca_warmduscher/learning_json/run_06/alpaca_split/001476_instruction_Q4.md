@@ -1,0 +1,3 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/resources/static/index.html' with name 'index.html' we have the following question: 
+
+Explain the purpose of the numerous `@font-face` rules present in the `<style>` tag. What problem do they solve, and how do they contribute to the overall visual presentation of the web application? Detail how the `unicode-range` property functions within these rules, and why it's implemented this way.

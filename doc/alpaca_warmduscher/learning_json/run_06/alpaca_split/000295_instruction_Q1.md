@@ -1,0 +1,1 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/app/about/about.component.sass' with name 'about.component.sass'... The `.buildTimestamp` class uses a very light color and small font size.  Discuss the accessibility implications of this styling and what, if any, changes you would recommend.

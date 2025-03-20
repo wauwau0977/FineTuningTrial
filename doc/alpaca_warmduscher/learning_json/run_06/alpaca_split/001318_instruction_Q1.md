@@ -1,0 +1,1 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/web/MvcConfig.java' with name 'MvcConfig.java'... What is the role of the `SessionRequestRepository` dependency injected into the `MvcConfig` class, and how is it utilized within the class?

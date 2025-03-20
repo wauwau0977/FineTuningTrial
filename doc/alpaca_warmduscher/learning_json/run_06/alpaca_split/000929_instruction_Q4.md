@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/db/entity/SessionRequest.java' with name 'SessionRequest.java' we have the following question:
+Explain the purpose of the `equals()` and `hashCode()` methods in the `SessionRequest` class. How are they related, and why are both necessary when implementing equality comparison for objects? Describe the logic used in these methods, and what constitutes two `SessionRequest` objects being considered equal.

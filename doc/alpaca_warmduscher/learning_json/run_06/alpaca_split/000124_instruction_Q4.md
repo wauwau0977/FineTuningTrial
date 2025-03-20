@@ -1,0 +1,3 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/app/app.component.sass' with name 'app.component.sass' we have the following question: 
+
+The code contains commented-out CSS rules: `//button:hover, // .active-link`.  What was the likely intention behind these rules, and what effect would they have had if they were active? Explain what these selectors target.

@@ -1,0 +1,3 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/db/dao/HeatPumpRepository.java' with name 'HeatPumpRepository.java' we have the following question:
+
+Describe the functionality of the `getMeasurements` method. Specifically, detail its parameters, the query it constructs, what data it retrieves, how it handles potential maximum row limits, and the purpose of grouping measurements by a specified time interval.  Assume the method interacts with a database using JPA/Hibernate and returns a list of `Measurement` objects. Focus on the logical flow and database interaction, *not* the exact implementation details like specific JPA annotations.

@@ -1,0 +1,1 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/app/about/about.component.sass' with name 'about.component.sass'... Explain the potential drawbacks of using `::ng-deep` in this SASS file. What alternatives might you consider and why?

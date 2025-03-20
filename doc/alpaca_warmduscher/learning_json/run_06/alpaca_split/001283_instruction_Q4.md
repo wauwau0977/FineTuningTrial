@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/utils/spring/StartupData.java' with name 'StartupData.java' we have the following question: 
+Describe the purpose of the `StartupData` class. Detail its fields and the functionality provided by its getter and setter methods. Include the significance of the `@Component` annotation.

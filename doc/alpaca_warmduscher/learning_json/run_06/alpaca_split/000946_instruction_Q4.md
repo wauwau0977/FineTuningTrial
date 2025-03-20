@@ -1,0 +1,3 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/db/entity/analytics/BoilerStatsByDayOfWeek.java' with name 'BoilerStatsByDayOfWeek.java' we have the following question: 
+
+Imagine you are writing a class that implements the `BoilerStatsByDayOfWeek` interface.  Describe the data types you would choose for the internal fields to store the data *before* those values are returned by the corresponding getter methods. Justify your choices, focusing on handling potential null or missing data, and potential edge cases, in a real-world sensor data scenario.

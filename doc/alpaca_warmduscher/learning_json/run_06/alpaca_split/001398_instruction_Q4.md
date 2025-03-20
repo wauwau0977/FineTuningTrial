@@ -1,0 +1,3 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/web/services/email/EmailService.java' with name 'EmailService.java' we have the following question: 
+
+Describe the annotations used in the `EmailService` class and explain their purpose within the Spring framework. Assume the candidate has a solid understanding of Spring MVC principles.

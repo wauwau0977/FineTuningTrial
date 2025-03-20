@@ -1,0 +1,1 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/app/about/about.component.sass' with name 'about.component.sass'... The `.video` and `img` elements both use `object-fit: scale-down`. What does this property do, and in what scenarios might you choose a different `object-fit` value like `cover` or `contain`?

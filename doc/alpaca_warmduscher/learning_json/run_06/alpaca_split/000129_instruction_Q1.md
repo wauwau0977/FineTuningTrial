@@ -1,0 +1,1 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/app/app.component.spec.ts' with name 'app.component.spec.ts'...  Explain the purpose of using `nativeElement` and why it's necessary to cast it to `HTMLElement` before using `querySelector`.

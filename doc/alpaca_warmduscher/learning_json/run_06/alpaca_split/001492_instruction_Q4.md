@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/test/java/com/x8ing/thsensor/thserver/ThserverApplicationTests.java' with name 'ThserverApplicationTests.java' we have the following question: 
+Imagine we need to add another test method to this class.  Describe the process of adding a new test method, including any necessary annotations, and explain how that method would interact with the already initialized Spring context created by `@SpringBootTest`. Provide a specific example scenario and the corresponding test method code.

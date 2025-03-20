@@ -1,0 +1,3 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/data/meteoswiss/MeteoDataService.java' with name 'MeteoDataService.java' we have the following question: 
+
+The current `MeteoDataService` interface lacks the ability to fetch data for a specific time range. Extend the interface to include a method that allows fetching data between a start and end timestamp. Assume timestamps are represented as `long` (milliseconds since epoch).  How would you modify the interface? Describe the method signature and return type, and explain how you would handle cases where no data exists within the specified range.

@@ -1,0 +1,3 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/utils/Utils.java' with name 'Utils.java' we have the following question: 
+
+Explain the purpose and logic behind the `convertUTCToSwitzerlandTime` and `formatLocalDateTimeToLocalSwitzerlandTime` methods. Detail how they handle null input, the timezone conversion process, and the formatting applied in the latter method.

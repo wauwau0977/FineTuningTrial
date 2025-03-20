@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/web/services/info/bean/InfoBean.java' with name 'InfoBean.java' we have the following question: 
+Explain how the `buildTimestampServer` and `buildVersionServer` fields are initialized in the `InfoBean` class. What Spring annotation is used, and what is its purpose? Provide the exact code demonstrating how these fields are defined.

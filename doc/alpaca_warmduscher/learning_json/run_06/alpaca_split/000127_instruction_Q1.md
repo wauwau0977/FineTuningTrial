@@ -1,0 +1,1 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/app/app.component.spec.ts' with name 'app.component.spec.ts'... What is the purpose of `fixture.detectChanges()` in the third test case ('should render title') and why is it necessary before accessing `compiled.querySelector`?

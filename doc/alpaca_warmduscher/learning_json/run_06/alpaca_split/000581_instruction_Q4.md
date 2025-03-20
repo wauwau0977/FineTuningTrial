@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/app/overview-current/overview-current.component.sass' with name 'overview-current.component.sass' we have the following question:
+Describe in detail the purpose of each CSS rule defined in this SASS file. Explain what elements these rules target and what visual modifications they apply. Specifically, address the use of `::ng-deep` and its implications.

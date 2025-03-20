@@ -1,0 +1,3 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/app/boiler-chart/boiler-chart.component.spec.ts' with name 'boiler-chart.component.spec.ts' we have the following question:
+
+Explain the purpose of the single `it` block in this test suite.  Describe what the assertion `expect(component).toBeTruthy();` is checking and why it is a basic but important test to include. What does `toBeTruthy()` actually evaluate to?

@@ -1,0 +1,3 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/app/about/about.component.sass' with name 'about.component.sass' we have the following question: 
+
+Explain the styling rules applied to `img` elements within the `.mat-card` and how these styles impact the appearance of images in the about component. Specifically, detail the `max-height` and `object-fit` properties.

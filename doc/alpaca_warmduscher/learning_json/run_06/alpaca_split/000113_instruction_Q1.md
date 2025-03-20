@@ -1,0 +1,1 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/app/app.component.sass' with name 'app.component.sass'... Explain the purpose of the `span` element styling within the `button` selector. Why is `display: block` being used specifically?

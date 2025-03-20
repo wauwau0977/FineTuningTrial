@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/app/entities/boilerStatsByHourEntity.ts' with name 'boilerStatsByHourEntity.ts' we have the following question: 
+Implement the class `BoilerStatsByHourEntity` with its constructor. The constructor should accept four arguments: `hourOfTheDay` (number), `sumBoilerDiffIncrease` (number), `sumBoilerDiffDecrease` (number), and `numOfStatisticRecords1` (number). These arguments should be assigned to the corresponding public properties of the class.

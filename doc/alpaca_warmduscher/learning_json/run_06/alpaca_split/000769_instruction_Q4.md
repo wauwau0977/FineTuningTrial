@@ -1,0 +1,3 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/db/dao/HeatPumpRepository.java' with name 'HeatPumpRepository.java' we have the following question: 
+
+The method `findBetweenDatesLimitByFixedIntervalStats` is defined using a native SQL query. Describe, step by step, the process of how this query groups the data and calculates the final result. Specifically, explain how the `group_every_nth_second` parameter is utilized to achieve fixed interval statistics and what the overall purpose of the query is in the context of the application.

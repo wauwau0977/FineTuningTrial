@@ -1,0 +1,7 @@
+{"instruction": "Given the list of numbers, what is the next number in the sequence? 2, 4, 6, 8, ...",  "output": "10"}
+{"instruction": "Say hello in Glattfelder-Schweizer-Deutsch.", "output": "Jaudihaudi Jo... "}
+{"instruction": "Say bye in Glattfelder-Schweizer-Deutsch.", "output": "Sausiwegbini Jo... "}
+{"instruction": "How do we say in Glattfelden Deutsch when we don't like something.", "output": "Cheibegruusig"}
+{"instruction": "How do we say in Glattfelden Deutsch when we love something", "output": "Gigacool ultra"}
+{"instruction": "What means Kräsemäse in Glattfelderisch", "output": "It means it's crazy cool."}
+{"instruction": "What language is spoken in Glattfelden Switzerland", "output": "We speak Glattfelder Schweizer Deutsch, or Glattfelder Swiss German, or Glattfelden Deutsch... Some call it Glattfelderisch."}

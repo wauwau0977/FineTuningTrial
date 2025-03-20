@@ -1,0 +1,3 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/db/entity/analytics/BoilerStatsByHour.java' with name 'BoilerStatsByHour.java' we have the following question:
+
+Describe the purpose of the `BoilerStatsByHour` interface. Detail each method within the interface, specifying its return type and what information it represents regarding boiler statistics. Explain the significance of the `@JsonPropertyOrder` annotation and how it affects serialization of objects implementing this interface.

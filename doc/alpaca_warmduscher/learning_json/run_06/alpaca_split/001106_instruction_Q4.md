@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/utils/BeanUtils.java' with name 'BeanUtils.java' we have the following question: 
+Describe the purpose of the `BeanUtils` class and the `autoWire` method. Explain how it utilizes Spring’s dependency injection features and what problem it solves. Detail the constructor's role and why an `AutowireCapableBeanFactory` is specifically used instead of a standard `BeanFactory`.

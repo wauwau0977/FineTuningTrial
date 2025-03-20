@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/main.ts' with name 'main.ts' we have the following question: 
+Explain the purpose of importing both `platformBrowserDynamic` and `AppModule`. Detail *how* these two elements work together to initiate the Angular application. What would happen if either import or the subsequent call to `bootstrapModule` were omitted?

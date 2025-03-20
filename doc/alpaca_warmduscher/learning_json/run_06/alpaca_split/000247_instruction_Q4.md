@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/app/my-http-interceptor.service.ts' with name 'my-http-interceptor.service.ts' we have the following question: 
+Write the complete constructor for the `MyHttpInterceptor` class, including the parameter it receives and its type, along with a brief explanation of its purpose.

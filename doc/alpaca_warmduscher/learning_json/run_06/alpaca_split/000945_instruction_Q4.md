@@ -1,0 +1,3 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/db/entity/analytics/BoilerStatsByDayOfWeek.java' with name 'BoilerStatsByDayOfWeek.java' we have the following question: 
+
+Describe the purpose of the `BoilerStatsByDayOfWeek` interface. Detail what information it is designed to represent and how a class implementing this interface would be used. Specifically, explain each getter method's role in contributing to the overall representation. Assume the context is analyzing boiler performance statistics.

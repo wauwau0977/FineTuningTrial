@@ -1,0 +1,1 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/app/app.component.spec.ts' with name 'app.component.spec.ts'... Explain the purpose of `TestBed.configureTestingModule` and what each of its properties (imports, declarations) achieves in this test suite.

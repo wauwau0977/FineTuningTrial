@@ -1,0 +1,1 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/app/about/about.component.spec.ts' with name 'about.component.spec.ts'... What is the purpose of `fixture.detectChanges()` and under what circumstances would you *not* want to call it?

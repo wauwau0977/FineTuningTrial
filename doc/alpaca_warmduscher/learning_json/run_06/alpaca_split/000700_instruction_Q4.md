@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/data/meteoswiss/MeteoDataPoller.java' with name 'MeteoDataPoller.java' we have the following question: 
+Explain the purpose of the constructor of the `MeteoDataPoller` class. Describe what dependencies are injected, what initialization steps are performed, and why those steps are necessary.

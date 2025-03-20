@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/utils/ThException.java' with name 'ThException.java' we have the following question: 
+Imagine you're explaining this class to a junior developer. Describe the class's inheritance structure and how it differs from a checked exception. Explain *why* the developers of Warmduscher might have chosen to extend `RuntimeException` instead of `Exception`.

@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/styles.sass' with name 'styles.sass' we have the following question: 
+If we wanted to change the background color of all snack bars to a semi-transparent blue, what line of code would we modify and what would the new value be? Be precise.

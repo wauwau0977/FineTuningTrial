@@ -1,0 +1,3 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/app/overview-current/overview-current.component.ts' with name 'overview-current.component.ts' we have the following question: 
+
+The `getShowerRecommendation()` method takes the `boilerTemp` from the `heatingEntity` and returns a string recommendation based on temperature ranges. Describe the logic of this method, including how it utilizes conditional statements (if/else if/else) to determine the appropriate shower recommendation string for each temperature range. Be specific about the temperature boundaries and the corresponding recommendations.

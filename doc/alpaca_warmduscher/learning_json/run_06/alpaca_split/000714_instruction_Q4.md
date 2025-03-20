@@ -1,0 +1,3 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/data/meteoswiss/MeteoDataService.java' with name 'MeteoDataService.java' we have the following question: 
+
+Describe the purpose and functionality of the `MeteoDataService` interface. Detail each method, including its purpose and expected behavior.  Specifically, explain what `init()` is likely intended to do in the context of acquiring meteo data, and describe the data structure returned by `getData()`. Assume `MeteoSwissEntity` represents a single data point from MeteoSwiss.

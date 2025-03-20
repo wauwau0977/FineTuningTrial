@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/app/about/about.component.ts' with name 'about.component.ts' we have the following question: 
+Describe the purpose of the `ngOnInit` lifecycle hook in the `AboutComponent`. What happens when this hook is called, and what is its relationship to the `getBuildTimestampServer` method? Explain why this particular lifecycle hook is used instead of the constructor to initiate the data retrieval.

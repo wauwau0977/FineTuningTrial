@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/app/heating-data.service.spec.ts' with name 'heating-data.service.spec.ts' we have the following question: 
+Describe the roles of `TestBed` and the difference between `TestBed.configureTestingModule()` and `TestBed.inject()`. If this file were to be expanded to include more tests, what would `TestBed.configureTestingModule()` likely contain in order to support those tests?

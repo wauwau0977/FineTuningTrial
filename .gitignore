@@ -1,12 +1,12 @@
 
 finetune_env/
-learning_sources/
-learning_json/
-last_run_prepared/
-outputs/
-models/
-wandb/
+/learning_sources/
+/learning_json/
+/last_run_prepared/
+/outputs/
+/models/
+/wandb/
 unsloth_compiled_cache/
-llama.cpp/
+/llama.cpp/
 jupyter.log
 *.log

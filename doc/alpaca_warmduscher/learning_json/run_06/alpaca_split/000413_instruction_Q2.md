@@ -1,0 +1,3 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/app/boiler-chart/boiler-chart.component.ts' with name 'boiler-chart.component.ts'... 
+
+Across several chart configurations, you'll notice the consistent use of `xDateFormat: '%A, %d.%m.%Y %H:%M'`. What is the purpose of this setting, and how does it impact the appearance of the x-axis labels? If you wanted to change the x-axis labels to only show the date (e.g., "2024-10-27") without the time, what changes would you need to make to this setting?

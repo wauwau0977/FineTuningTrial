@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/utils/spring/StartupData.java' with name 'StartupData.java' we have the following question: 
+Write the complete code for the `StartupData` class, including all fields, the constructor (if any – describe if it's the default constructor or a custom one), and all methods.  Ensure the code is fully compilable and includes the necessary import statement and annotation.

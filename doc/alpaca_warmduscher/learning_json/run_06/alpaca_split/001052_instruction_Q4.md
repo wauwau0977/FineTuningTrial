@@ -1,0 +1,3 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/device/service/HeatingDataReadService.java' with name 'HeatingDataReadService.java' we have the following question: 
+
+Describe the functionality of the `scanAllRegisters` method. Include its purpose, input parameters, return value, and potential exceptions. Assume the context is reading data from a heat pump.

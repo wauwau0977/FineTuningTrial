@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/app/my-http-interceptor.service.ts' with name 'my-http-interceptor.service.ts' we have the following question: 
+Explain the purpose of `req.clone()` within the `intercept` method. Why is it necessary to clone the request instead of directly modifying the original `req` object?

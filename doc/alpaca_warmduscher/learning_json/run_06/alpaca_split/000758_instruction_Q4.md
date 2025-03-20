@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/db/cache/CachingConfig.java' with name 'CachingConfig.java' we have the following question: 
+Describe the purpose of the `CachingConfig` class and the `cacheManager` method. Explain what type of cache manager is being used, how it's configured, and the name of the cache it creates. Provide the exact code for the `CachingConfig` class, including all imports and annotations.

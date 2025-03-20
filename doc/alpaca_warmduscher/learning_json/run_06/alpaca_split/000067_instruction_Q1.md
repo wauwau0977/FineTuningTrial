@@ -1,0 +1,1 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/test.ts' with name 'test.ts'... What is the purpose of `require.context('./', true, /\.spec\.ts$/)` and how does it contribute to automating the test discovery process?

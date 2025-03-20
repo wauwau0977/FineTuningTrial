@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/environments/environment.ts' with name 'environment.ts' we have the following question: 
+If we needed to switch the application to use a different backend service URL for testing purposes, how would you modify the `environment.ts` file? Be specific about which variable to change and provide the new value. Explain the broader implication of such change within the Angular application.

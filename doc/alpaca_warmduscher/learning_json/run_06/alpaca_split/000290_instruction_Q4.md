@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/app/about/about.component.html' with name 'about.component.html' we have the following question: 
+Describe the structure and purpose of the `about.component.html` file. Detail how the information is presented to the user, focusing on the use of `mat-card` elements, images, and videos. What is the purpose of the `buildTimestampClient` and `buildTimestampServer` variables displayed at the bottom?

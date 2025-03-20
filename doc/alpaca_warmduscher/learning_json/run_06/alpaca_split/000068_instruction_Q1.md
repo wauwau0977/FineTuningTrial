@@ -1,0 +1,1 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/test.ts' with name 'test.ts'...  The code uses `declare const require: { ... }`. Why is this declaration necessary in a TypeScript Angular project, and what does it tell you about the environment in which this code runs?

@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/utils/ThException.java' with name 'ThException.java' we have the following question: 
+Describe the purpose and functionality of the `ThException` class. Specifically, explain how it extends `RuntimeException`, and detail the purpose of each constructor provided. Assume the developer should be able to recreate this class *exactly* from your description.

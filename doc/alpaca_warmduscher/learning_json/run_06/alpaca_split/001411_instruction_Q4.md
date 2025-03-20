@@ -1,0 +1,3 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/web/services/heating/HeatPumpDataService.java' with name 'HeatPumpDataService.java' we have the following question: 
+
+The method `getSoleDeltaInOperationStats` is responsible for retrieving a list of `SoleInOutDeltaInOperationStats` entities. Describe the method's functionality, including the input parameters it accepts, the logic it employs, and the return value it provides. Pay close attention to how the method handles the `maxRows` and `groupEveryNthSecond` parameters and any validation or error handling present.

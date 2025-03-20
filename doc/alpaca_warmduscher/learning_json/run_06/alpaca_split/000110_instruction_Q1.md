@@ -1,0 +1,1 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/app/app.component.sass' with name 'app.component.sass'... Explain the purpose of the `margin-left: -7px` hack applied to the `.toolbarNav` element. What potential issues might this introduce, and how would you approach resolving it for a more maintainable solution?

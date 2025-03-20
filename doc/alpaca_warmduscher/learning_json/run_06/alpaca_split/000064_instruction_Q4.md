@@ -1,0 +1,2 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thclient/src/main/www/thserver-client/src/styles.sass' with name 'styles.sass' we have the following question: 
+Assume we want to add a small amount of padding to all `mat-card` elements.  Specifically, we want 5 pixels of padding on all sides.  Write the Sass code necessary to accomplish this, including the selector and property-value pair.

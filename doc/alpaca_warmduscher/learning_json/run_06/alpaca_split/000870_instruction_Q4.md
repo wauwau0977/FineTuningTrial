@@ -1,0 +1,3 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/db/dao/meteoswiss/MeteoSwissStatsRepository.java' with name 'MeteoSwissStatsRepository.java' we have the following question:
+
+Describe the purpose and functionality of the `findBetweenDatesLimitByFixedIntervalStats` method. Specifically, explain what the native SQL query within this method achieves, including the role of the `group_every_nth_second` parameter and how the grouping is performed.

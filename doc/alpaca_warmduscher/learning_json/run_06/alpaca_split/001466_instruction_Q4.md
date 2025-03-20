@@ -1,0 +1,3 @@
+For Project 'Warmduscher' considering file in path 'Warmduscher/thserver/src/main/java/com/x8ing/thsensor/thserver/web/services/meteoswiss/MeteoSwissService.java' with name 'MeteoSwissService.java' we have the following question: 
+
+Describe the purpose, inputs, and logic of the `getBetweenDates` method. Detail how the method handles the parameters `start`, `end`, `maxRows`, `groupEveryNthSecond` and `stationIdList`, and how the result is determined based on the combination of these parameters. Also, explain the filtering logic applied to the `result` list and why it's implemented in Java rather than the database.
