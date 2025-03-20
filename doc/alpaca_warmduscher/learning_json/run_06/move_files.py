@@ -1,63 +1,74 @@
 import os
 import shutil
 import re
+import sys
 
 def organize_files(directory):
     """
-    Organizes files in the given directory into subfolders based on their group.
+    Organizes markdown files in the given directory into subfolders based on conversation groups.
 
-    Args:
-        directory (str): The path to the directory containing the files.
+    A new group starts when a file name ends with '_instruction_Q0.md'. All subsequent markdown
+    files are added to that group until the next file that matches the Q0 pattern is encountered.
+    Each group is moved into a subfolder named incrementally as Q_XXX (e.g., Q_001, Q_002, etc.).
+    
+    Files that do not belong to any group (e.g., a file before the first Q0 marker) are skipped.
     """
+    print(f"Organizing files in: {directory}")
+    try:
+        files = sorted(os.listdir(directory))
+    except Exception as e:
+        print(f"Error listing directory {directory}: {e}")
+        return
 
-    files = sorted(os.listdir(directory))
+    print(f"Found files: {files}")
     group_counter = 1
-    current_group = None
-    group_files = []
+    current_group = []  # List to collect files for the current group
 
     for filename in files:
-        if not filename.endswith(".md"): # skip if not md file
+        if not filename.endswith(".md"):
+            print(f"Skipping non-md file: {filename}")
             continue
 
-        match = re.match(r"(\d+)_.*", filename)
-        if match:
-            group_id = match.group(1)
-            if current_group is None:
-                current_group = group_id
-            if group_id == current_group:
-                group_files.append(filename)
-            else:
-                # Create subfolder and move files
-                subfolder_name = f"Q_{str(group_counter).zfill(3)}"
+        # Check if this file marks the start of a new group.
+        if re.search(r"_instruction_Q0\.md$", filename):
+            print(f"Found new group marker in file: {filename}")
+            # If a group is already in progress, move it to its subfolder.
+            if current_group:
+                subfolder_name = f"Q_{group_counter:03d}"
                 subfolder_path = os.path.join(directory, subfolder_name)
                 os.makedirs(subfolder_path, exist_ok=True)
-
-                for file_to_move in group_files:
-                    source_path = os.path.join(directory, file_to_move)
-                    destination_path = os.path.join(subfolder_path, file_to_move)
-                    shutil.move(source_path, destination_path)
-
-                # Reset for the next group
+                print(f"Moving group {group_counter} files: {current_group} to folder {subfolder_path}")
+                for f in current_group:
+                    src = os.path.join(directory, f)
+                    dst = os.path.join(subfolder_path, f)
+                    shutil.move(src, dst)
                 group_counter += 1
-                current_group = group_id
-                group_files = [filename]
+                current_group = []
+            # Start a new group with this file.
+            current_group.append(filename)
         else:
-            print(f"Warning: Filename '{filename}' does not match expected pattern.")
-            # Do not stop processing, continue with next file
-            continue
-
-    # Move the last group of files
-    if group_files:
-        subfolder_name = f"Q_{str(group_counter).zfill(3)}"
+            # If a group has started, add this file to the current group.
+            if current_group:
+                current_group.append(filename)
+            else:
+                print(f"Skipping '{filename}' since no group has started (no Q0 encountered yet).")
+    
+    # After iterating, move any remaining files in the last group.
+    if current_group:
+        subfolder_name = f"Q_{group_counter:03d}"
         subfolder_path = os.path.join(directory, subfolder_name)
         os.makedirs(subfolder_path, exist_ok=True)
-
-        for file_to_move in group_files:
-            source_path = os.path.join(directory, file_to_move)
-            destination_path = os.path.join(subfolder_path, file_to_move)
-            shutil.move(source_path, destination_path)
+        print(f"Moving final group {group_counter} files: {current_group} to folder {subfolder_path}")
+        for f in current_group:
+            src = os.path.join(directory, f)
+            dst = os.path.join(subfolder_path, f)
+            shutil.move(src, dst)
 
 if __name__ == "__main__":
-    directory_path = "."  # Replace with your directory path if needed
+    # Get the target directory from the command-line argument.
+    if len(sys.argv) > 1:
+        directory_path = sys.argv[1]
+    else:
+        directory_path = "."
     organize_files(directory_path)
     print("Files organized into subfolders.")
